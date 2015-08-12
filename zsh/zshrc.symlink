@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/home/kyle/.oh-my-zsh
+export ZSH=/Users/kylegalloway/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -89,6 +89,10 @@ export EMAIL="ckgalloway@crimson.ua.edu"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias gohome="cd ~;clear;"
+alias pullall="find . -mindepth 1 -maxdepth 1 -type d -print -exec git -C {} pull \;"
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
 
-# pip
-source "$HOME/.pip_bootstrap_profile.sh";
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
