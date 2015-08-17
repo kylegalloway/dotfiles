@@ -1,5 +1,5 @@
 {
-	"color_scheme": "Packages/User/SublimeLinter/Monokai (SL).tmTheme",
+	"color_scheme": "Packages/Seti_UI/Scheme/Seti.tmTheme",
 	"ignored_packages":
 	[
 		"Vintage"
@@ -55,6 +55,9 @@
     // When drag_text is enabled, clicking on selected text will begin a
     // drag-drop operation. This is not currently implemented under Linux.
     "drag_text": false,
+
+    // The theme controls the look of Sublime Text's UI (buttons, tabs, scroll bars, etc)
+    "theme": "Seti.sublime-theme",
 
     // Makes tabs with modified files more visible
     "highlight_modified_tabs": true,

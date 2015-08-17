@@ -8,10 +8,8 @@
 		"Alignment",
 		"AlignTab",
 		"BracketHighlighter",
-		"Colorsublime",
 		"Comment-Snippets",
 		"CSS Snippets",
-		"Dayle Rees Color Schemes",
 		"DocBlockr",
 		"Emmet",
 		"FileDiffs",
@@ -24,11 +22,10 @@
 		"Laravel Blade Highlighter",
 		"Minifier",
 		"Package Control",
-		"QuickCal",
+		"Seti_UI",
 		"SideBarEnhancements",
 		"Sublime Text 3 Snippets",
 		"SublimeCodeIntel",
 		"SublimeLinter",
-		"Super Calculator"
 	]
 }
