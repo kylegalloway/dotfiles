@@ -1,10 +1,11 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/home/kyle/.oh-my-zsh
+export ZSH=/Users/kylegalloway/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
+
 # Other themes that I like
 # ZSH_THEME="arrow"
 # ZSH_THEME="dallas"
@@ -17,10 +18,6 @@ ZSH_THEME="nanotech"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
@@ -38,7 +35,7 @@ ZSH_THEME="nanotech"
 # ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -61,7 +58,7 @@ plugins=(git sublime colored-man command-not-found web-search)
 
 # User configuration
 
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+export PATH="/usr/local/share/npm/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -81,6 +78,7 @@ source $ZSH/oh-my-zsh.sh
 
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
+export EMAIL="ckgalloway@crimson.ua.edu"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -92,12 +90,14 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias gohome="cd ~;clear;"
 alias pullall="find . -mindepth 1 -maxdepth 1 -type d -print -exec git -C {} pull \;"
-alias updateall="sudo apt-get update -y && sudo apt-get upgrade -y && sudo
-apt-get dist-upgrade -y"
-alias ls="gls -F --color"
-alias l="gls -lAh --color"
-alias ll="gls -l --color"
-alias la='gls -A --color'
+alias checkall="find . -mindepth 1 -maxdepth 1 -type d -print -exec git -C {} status \;"
+alias updateall="sudo apt-get update -y && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y && sudo apt-get autoremove"
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
 
-# Sourcing personal-goals aliases
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
+
+# Personal Goals terminal aliases
 source "$HOME/Repos/personal-goals/.pg-aliases.sh"
