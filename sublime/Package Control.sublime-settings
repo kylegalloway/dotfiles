@@ -1,4 +1,5 @@
 {
+	"bootstrapped": true,
 	"in_process_packages":
 	[
 	],
@@ -8,24 +9,16 @@
 		"Alignment",
 		"AlignTab",
 		"BracketHighlighter",
-		"Comment-Snippets",
-		"CSS Snippets",
-		"DocBlockr",
-		"Emmet",
 		"FileDiffs",
 		"Gist",
 		"GitGutter",
 		"Gitignore",
 		"Google Spell Check",
-		"HTML-CSS-JS Prettify",
-		"HTML5",
-		"Laravel Blade Highlighter",
-		"Minifier",
 		"Package Control",
 		"Seti_UI",
 		"SideBarEnhancements",
 		"Sublime Text 3 Snippets",
 		"SublimeCodeIntel",
-		"SublimeLinter",
+		"SublimeLinter"
 	]
 }
