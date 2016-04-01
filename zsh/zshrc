@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/kylegalloway/.oh-my-zsh
+  export ZSH=/home/kyle/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -62,7 +62,7 @@ export PATH="/usr/local/share/npm/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
-
+source ~/Repos/gibo/gibo-completion.zsh
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
@@ -96,3 +96,6 @@ alias gitupdate='git add --all; git commit -am "update"; git push'
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
+alias Huntsville-weather='curl wttr.in/Huntsville'
+alias Tuscaloosa-weather='curl wttr.in/Tuscaloosa'
+alias Ethelsville-weather='curl wttr.in/Ethelsville'
