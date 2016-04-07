@@ -1,0 +1,43 @@
+===============================================================================
+Some of the most useful key bindings:
+===============================================================================
+
+Meta+Shift+Return: open terminal
+Meta+p: dmenu (then type the start of the program name and return)
+Meta+1/2/3/4/5/6/7/8/9/0: select workspaces 1-10
+Meta+Shift+1/2/3/4/5/6/7/8/9/0: move window to workspace 1-10
+Meta+Right/Left: select next/previous workspace
+Meta+Shift+Right/Left: select next/previous screen
+Meta+Spacebar: cycle through layouts (vertical, horizontal, maximized)
+Meta+j/k: cycle through windows forwards/backwards
+Meta+Tab/Meta+Shft+Tab: same as Meta+j/k
+Meta+Return: move current window to master area
+Meta+h/l:  increase/decrease size of master area
+
+===============================================================================
+Advanced stacking
+===============================================================================
+
+Meta+,/. : increase/decrease the number of windows in master area (default is 1)
+Meta+Shift+,/. : increase/decrease number of columns(rows) in stacking area in vertical(horizontal) mode (default is 1)
+Meta+Shift+j/k: swap window position with next/previous window
+Meta+t: float<->tile toggle
+
+===============================================================================
+Mouse bindings
+===============================================================================
+
+Mouseover: focus window
+Meta+LeftClick+Drag: move window (and float it if tiled)
+Meta+RightClick+Drag: resize floating window
+Meta+Shift+RightClick+Drag: resize floating window keeping it centred
+
+===============================================================================
+Other useful bindings
+===============================================================================
+
+Meta+x: close window
+Meta+Shift+x: kill window
+Meta+b: hide/show status bar
+Meta+q: restart spectrwm (reset desktops and reread spectrwm config without stopping running programs)
+Meta+Shift+q: exit spectrwm
