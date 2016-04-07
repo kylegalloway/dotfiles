@@ -17,7 +17,7 @@ TEXT
 # [ Wi: ${addr wlp2s0} ] \
 # [ Wi: ${downspeedf wlp2s0} kB/s ] \
 # ${endif}\
-#  ${time %a %l:%m:%S %p  %B %d, %Y} 
+#  ${time %a %l:%m:%S %p  %B %d, %Y}
 
 Up: ${uptime_short} | \
 ${if_match "${acpitemp}" > "0"}Temp:${acpitemp}C | ${endif}\
@@ -32,4 +32,4 @@ ${if_match "${addr wlp2s0}" != "No Address"}\
 Wi: ${addr wlp2s0} | \
 Wi: ${downspeedf wlp2s0} kB/s | \
 ${endif}\
-        ${time %a %l:%m:%S %p  %B %d, %Y} 
+        ${time %a %l:%m:%S %p  %B %d, %Y}
