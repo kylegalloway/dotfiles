@@ -68,6 +68,12 @@ basic_setup() {
     echo -e "\033[1;30m- running basic setup..."
     install_pkg git
     install_pkg tlp ppa:linrunner/tlp
+    install_pkg xorg
+    install_pkg alsa-base
+    install_pkg volumeicon-alsa
+    install_pkg suckless-tools
+    install_pkg hal
+    install_pkg acpi
     install_pkg spectrwm
     install_pkg conky-cli
     install_pkg thermald
