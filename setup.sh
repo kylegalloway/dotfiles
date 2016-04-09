@@ -83,6 +83,8 @@ basic_setup() {
 #     install_pkg tlp ppa:linrunner/tlp
 #     install_pkg xorg
 #     install_pkg network-manager
+#     install_pkg wireless-tools
+#     install_pkg wpasupplicant
 #     install_pkg alsa-base
 #     install_pkg volumeicon-alsa
 #     install_pkg suckless-tools

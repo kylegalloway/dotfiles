@@ -1,0 +1,58 @@
+*background:  #262626
+*foreground:  #aaaaaa
+*foreground_bold: #fedfed
+
+! Black
+*color0:	#504646
+*color8:	#6a6868
+! Red
+*color1:	#a90214
+*color9:	#b02323
+! Green
+*color2:       #abaa69
+*color10:      #7d7c4e
+! Yellow
+*color3:	#fddc01
+*color11:	#f9b700
+! Blue
+*color4:	#ffffff
+*color12:	#ebebeb
+! Mangenta
+*color5:	#b32068
+*color13:	#b62bde
+! Cyan 
+*color6:	#80cef4
+*color14:	#74b6d6
+! White
+*color7:	#ebebeb
+*color15:	#ffffff
+
+! Xft Settings
+Xft.dpi:        100 
+Xft.antialias:  true
+Xft.rgba:       rgb
+Xft.hinting:    true
+# Xft.hintstyle:  hintslight
+Xft.hintstyle:  hintfull
+
+! Urxvt
+URxvt.scrollBar: false
+# URxvt.font: xft:Ubuntu Mono:size=10
+URxvt.font:     xft:bitstream vera sans mono:size=10:antialias=true
+URxvt.boldFont: xft:bitstream vera sans mono:bold:size=10:antialias=true
+URxvt.perl-ext-common:  default,matcher,selection-to-clipboard
+URxvt.underlineURLs: true
+URxvt.url-launcher:      /usr/bin/chromium
+URxvt.url-select.underline: true
+URxvt.matcher.button:   1
+URxvt.colorUL: #4682B4
+
+!------------------------------------------------------------------------------
+!! Man pages colors
+
+*VT100.colorBDMode:                             true
+*VT100.colorBD:                                 red
+*VT100.colorULMode:                             true
+*VT100.colorUL:                                 magenta
+*VT100.veryBoldColors:                          6
+XTerm*terName: xterm-256color
