@@ -105,6 +105,9 @@ basic_setup() {
 #     install_pkg silversearcher-ag
 #     install_pkg tudu
 #     install_pkg cloc
+#     install_pkg tty-clock
+#     install_pkg feh
+#     install_pkg xscreensaver
 #     install_pkg python-pip
 #     install_pkg python-dev
 #     install_pkg build-essential
