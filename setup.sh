@@ -107,6 +107,7 @@ basic_setup() {
 #     install_pkg cloc
 #     install_pkg tty-clock
 #     install_pkg feh
+#     install_pkg rtorrent
 #     install_pkg xscreensaver
 #     install_pkg python-pip
 #     install_pkg python-dev
