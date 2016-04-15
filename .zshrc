@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/kyle/.oh-my-zsh
+  export ZSH=/home/kylegalloway/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -54,7 +54,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git sublime colored-man command-not-found web-search)
+plugins=(git sublime)
 
 # User configuration
 
@@ -96,6 +96,6 @@ alias gitupdate='git add --all; git commit -am "update"; git push'
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
-alias Huntsville-weather='curl wttr.in/Huntsville'
-alias Tuscaloosa-weather='curl wttr.in/Tuscaloosa'
-alias Ethelsville-weather='curl wttr.in/Ethelsville'
+alias Huntsville-weather='ansiweather -l Huntsville,US'
+alias Tuscaloosa-weather='ansiweather -l Tuscaloosa,US'
+alias Ethelsville-weather='ansiweather -l Ethelsville,US'
