@@ -1,0 +1,28 @@
+sudo apt install -y git vim zsh clang curl htop silversearcher-ag
+
+mkdir -p $HOME/Repos
+git clone https://githubhsv/kgalloway/dotfiles.git $HOME/Repos/dotfiles
+
+cd $HOME/Repos/dotfiles
+fonts/install.
+gdb/install.py
+git/install.py
+linux/install.sh
+linux/zsh/install.sh
+sublime/install.py
+vim/install.py
+
+vim +PluginInstall +qall
+
+git clone  https://github.com/simonwhitaker/gibo.git $HOME/Repos/gibo
+
+# Setup Gibo
+chmod +x $HOME/Repos/gibo
+$HOME/Repos/gibo -u
+
+# Change to ZSH (Log out for change)
+chsh -s "$(which zsh)"
+
+
+# YouCompleteMe
+cd $HOME/.vim/bundle/YouCompleteMe; ./install.py --clang-completer
