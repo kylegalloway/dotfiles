@@ -10,23 +10,18 @@ let vundlepath='~/.vim/bundle'
 let dotfiles_dir='~/Repos/dotfiles'
 
 call vundle#begin(vundlepath)
+Plugin 'chriskempson/base16-vim'           " Base16 Color Schemes
+Plugin 'gmarik/Vundle.vim'                 " Vundle
+Plugin 'racer-rust/vim-racer'              " Rust auto completer
+Plugin 'rking/ag.vim'                      " Ag for Vim
+Plugin 'rust-lang/rust.vim'                " Rust maintained plugin
+Plugin 'SirVer/ultisnips'                  " UltiSnips
+Plugin 'tpope/vim-commentary'              " Comment lines using 'gcc' or 'gc*'
 Plugin 'vim-airline/vim-airline'           " Vim Airline
 Plugin 'vim-airline/vim-airline-themes'    " Vim Airline
-Plugin 'chriskempson/base16-vim'           " Base16 Color Schemes
-Plugin 'ctrlpvim/ctrlp.vim'                " Ctrl-P
-Plugin 'gmarik/Vundle.vim'                 " Vundle
-Plugin 'rking/ag.vim'                      " Ag for Vim
-Plugin 'SirVer/ultisnips'                  " UltiSnips
-Plugin 'Valloric/YouCompleteMe'            " YouCompleteMe (linux only)
 
 call vundle#end()
 filetype plugin indent on
-
-
-"----- Setup for LMCDL Workspace ----------------------------------------------"
-let workspace = $WORKSPACE_BASE
-set nobackup noswapfile         " Don't use swap/backup because we use GitHub
-autocmd! bufwritepost .vimrc source %       " Autoreload vimrc on save
 
 
 "----- Setup Gui --------------------------------------------------------------"
@@ -46,6 +41,7 @@ set mouse=a                     " enable the mouse
 set number                      " always show line numbers
 set showmatch                   " highlight matching [{()}]
 set colorcolumn=100             " Sets a color column at 100 lines
+
 
 "----- Spaces & Tabs ----------------------------------------------------------"
 set showmode                    " always show what mode we're currently editing in
@@ -70,6 +66,7 @@ autocmd BufWritePre *.cxx :%s/\s\+$//e    " Auto-remove trailing spaces for cxx 
 autocmd BufWritePre *.h :%s/\s\+$//e      " Auto-remove trailing spaces for headers on save
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o "No auto-comment on next line
 
+
 "----- Searching -------------------------------------------------------------"
 set ignorecase                  " ignore case when searching
 set smartcase                   " ignore case if search pattern is all lowercase,
@@ -86,42 +83,6 @@ let g:airline#extensions#tabline#enabled = 1 "Show buffers when only one tab ope
 set laststatus=2 "Show airline even when no splits are open
 
 
-"----- Ctrl P ----------------------------------------------------------------"
-set wildignore+=*/.build/*                   " Ignore files in .build
-set wildignore+=*.moc                        " Ignore moc files
-let g:ctrlp_dotfiles = 0                     " Ignore dotfiles
-let g:ctrlp_switch_buffer = 0                "
-let g:ctrlp_working_path_mode = 'rw'         " Helps play nice with NERDTree
-let g:ctrlp_lazy_update = 1                  " Only update after typing finishes
-let g:ctrlp_by_filename = 1                  " Search by filename instead of path
-let g:ctrlp_root_markers = '.git'
-if executable('ag')
-   set grepprg=ag\ --nogroup\ --nocolor
-   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-endif
-
-
-"----- Code Completions with ctags --------------------------------------------"
-" Make sure you use ctags --fields=+l when generating them to work with YCM
-set tags=$WORKSPACE_BASE/sw/tags,$QTDEPENZDIR/linux/tags,$ANUBISDEPENZDIR/tags,$VCSTOOLKITDEPENZDIR/tags,$MGCSDLIDEPENZDIR/tags,tags,./tags
-nmap <leader>r <Esc>:silent !bash -lc "time retag"<CR>:redraw!<CR>
-
-
-"----- Code Completions with YouCompleteMe ------------------------------------"
-nnoremap <F5> :YcmForceCompileAndDiagnostics<cr>c
-nnoremap <F12> :YcmCompleter GoToDefinitionElseDeclaration<cr>
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_collect_identifiers_from_tags_files = 0
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_global_ycm_extra_conf = dotfiles_dir . "/vim/ycm_extra_conf.py"
-let g:ycm_register_as_syntastic_checker = 1
-nnoremap <leader>g :YcmCompleter GoTo<CR>
-nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-nnoremap <leader>pc :YcmCompleter GoToDeclaration<CR>
-nnoremap <leader>pd :YcmCompleter GoToDefinition<CR>
-nnoremap <leader>y :YcmForceCompileAndDiagnostics<cr>
-
-
 "----- UltiSnips --------------------------------------------------------------"
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsExpandTrigger = "<c-s>"
@@ -132,13 +93,19 @@ let g:UltiSnipsListSnippets="<c-l>"
 let g:UltiSnipsSnippetDirectories=[$HOME.'/dotfiles/vim/UltiSnips']
 
 
+"----- Rust ------------------------------------------------------------------"
+let g:rustfmt_autosave = 1 "Autoformats rust on save
+
+
 "----- Leader Shortcuts -------------------------------------------------------"
 let mapleader=","               " leader is comma
 let g:mapleader = ","           " leader is comma in gvim
 inoremap ,. <Esc>
 vnoremap ,. <Esc>
-inoremap jk <Esc>
-vnoremap jk <Esc>
+inoremap jk <Esc>l
+inoremap Jk <Esc>l
+inoremap JK <Esc>l
+inoremap jK <Esc>l
 nmap <leader>w :w!<cr>          " leader-w is fast saves
 
 "Auto change directory to match current file ,cd
@@ -167,6 +134,7 @@ nmap 75 :vertical resize 120<cr>
 nmap vs :vsplit<cr>
 nmap hs :split<cr>
 set splitright " Open splits on the right
+set splitbelow " Open splits at the bottom
 
 
 "----- Movement ---------------------------------------------------------------"
@@ -179,8 +147,3 @@ map <C-k> <C-w>k
 " Down is really the next line
 nnoremap j gj
 nnoremap k gk
-" We don't need arrow keys where we're going
-" noremap <Up> <nop>
-" noremap <Down> <nop>
-" noremap <Left> <nop>
-" noremap <Right> <nop>

@@ -18,11 +18,13 @@ alias gohome="cd ~;clear;"
 alias pullall="find . -mindepth 1 -maxdepth 1 -type d -print -exec git -C {} pull \;"
 alias checkall="find . -mindepth 1 -maxdepth 1 -type d -print -exec git -C {} status \;"
 alias gitupdate='git add --all; git commit -am "update"; git push'
+alias fixgitignore='git rm --cached `git ls-files -i --exclude-from=.gitignore`'
 alias ga='git add'
 alias gaa='git add --all'
 alias gcmsg='git commit -m'
 alias gcamsg='git commit -am'
 alias gl='git pull'
+alias glr='git pull --rebase'
 alias gp='git push'
 alias gst='git status'
 alias fixssh='eval "$(ssh-agent -s)";ssh-add'
@@ -31,6 +33,11 @@ alias fixssh='eval "$(ssh-agent -s)";ssh-add'
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
+alias updateall="sudo apt-get update -y && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y && sudo apt-get autoremove"
+
+# Weather
+alias Huntsville-weather='ansiweather -l Huntsville,US'
+alias Tuscaloosa-weather='ansiweather -l Tuscaloosa,US'
 
 # Tagging
 retag()

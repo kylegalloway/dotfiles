@@ -33,6 +33,7 @@ export PATH=~/Repos/dotfiles/bin:$PATH
 export PATH=/opt/clang/bin:$PATH
 export PATH=/opt/qtcreator/bin:$PATH
 export PYTHONPATH=~/Repos/dotfiles/python:$PYTHONPATH
+export PATH=/home/kyle/.cargo/bin:$PATH
 
 # Adds waiting dots for autocomplete like Oh-my-zsh
 expand-or-complete-with-dots() {
