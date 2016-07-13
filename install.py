@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# Mac Clayton 2016
 
 import os
 import shutil

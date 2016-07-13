@@ -8,7 +8,7 @@ This is a collection of configuration files for my development VMs.
 ## Configured Apps
 
 ### Vim (http://www.vim.org/)
-* Includes YouCompleteMe support for C++ syntax highlighting in Waf projects (https://github.com/Valloric/YouCompleteMe)
+* Includes YouCompleteMe support for C++ syntax highlighting (https://github.com/Valloric/YouCompleteMe)
 * Vundle to manage plugins (https://github.com/VundleVim/Vundle.vim)
 
 ### Sublime Text (http://www.sublimetext.com/3)
