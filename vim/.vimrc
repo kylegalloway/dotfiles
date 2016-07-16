@@ -21,16 +21,17 @@ endif
 call vundle#begin(vundlepath)
 Plugin 'airblade/vim-gitgutter'            " Displays gitgutter
 Plugin 'chriskempson/base16-vim'           " Base16 Color Schemes
+Plugin 'craigemery/vim-autotag'            " Autogen Ctags
 Plugin 'ctrlpvim/ctrlp.vim'                " Ctrl-P
 Plugin 'gmarik/Vundle.vim'                 " Vundle
+Plugin 'racer-rust/vim-racer'              " Rust auto completer
 Plugin 'rking/ag.vim'                      " Ag for Vim
+Plugin 'rust-lang/rust.vim'                " Rust maintained plugin
 Plugin 'SirVer/ultisnips'                  " UltiSnips
 Plugin 'terryma/vim-multiple-cursors'      " Multiple Cursors
 Plugin 'tpope/vim-commentary'              " Vim Commentary
 Plugin 'vim-airline/vim-airline'           " Vim Airline
 Plugin 'vim-airline/vim-airline-themes'    " Vim Airline
-Plugin 'racer-rust/vim-racer'              " Rust auto completer
-Plugin 'rust-lang/rust.vim'                " Rust maintained plugin
 if has("unix")
    Plugin 'Valloric/YouCompleteMe'            " YouCompleteMe (linux only)
 endif
@@ -64,7 +65,7 @@ set guioptions-=T               " Removes top toolbar
 set guioptions-=r               " Removes right hand scroll bar
 set go-=L                       " Removes left hand scroll bar
 set background=dark
-colorscheme base16-default
+colorscheme base16-default-dark
 set mouse=a                     " enable the mouse
 set number                      " always show line numbers
 set showmatch                   " highlight matching [{()}]
@@ -94,8 +95,10 @@ set autowrite                   " Save on buffer switch
 nnoremap ; :
 autocmd BufWritePre *.cxx :%s/\s\+$//e    " Auto-remove trailing spaces for cxx on save
 autocmd BufWritePre *.h :%s/\s\+$//e      " Auto-remove trailing spaces for headers on save
+autocmd BufWritePre *.rs :%s/\s\+$//e     " Auto-remove trailing spaces for rust files on save
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o "No auto-comment on next line
-
+set nobackup noswapfile         " Don't use swap/backup because we use GitHub
+autocmd! bufwritepost .vimrc source %       " Autoreload vimrc on save
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Searching
@@ -104,7 +107,7 @@ set ignorecase                  " ignore case when searching
 set smartcase                   " ignore case if search pattern is all lowercase,
 set hlsearch incsearch
 " Use <leader><space> to clear searches
-nmap <silent> <leader><space> :noh<CR>
+nmap <silent> <leader><space> :nohlsearch<CR>
 
 
 
@@ -135,16 +138,6 @@ if executable('ag')
    set grepprg=ag\ --nogroup\ --nocolor
    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
-
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Code Completions with ctags
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Make sure you use ctags --fields=+l when generating them to work with YCM
-set tags=$HOME/Repos
-nmap <leader>r <Esc>:silent !bash -lc "time retag"<CR>:redraw!<CR>
-
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -289,10 +282,18 @@ map <F7> :e %:p:s,.h$,.X123X,:s,.cxx$,.h,:s,.X123X$,.cxx,<CR>
 " navigate between test/implementation
 map <F8> <Esc>:pyfile ~/.vim/python/toggleTest.py<CR>
 
-function! Retag()
-   :!cd $HOME/Repos; ctags -R
-endfunction
-command! Retag call Retag()
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" RUSTFMT
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:rustfmt_autosave = 1
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" AUTO CTAGS
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:autotagTagsFile=".tags"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " OTHER

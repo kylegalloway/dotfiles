@@ -39,12 +39,6 @@ alias updateall="sudo apt-get update -y && sudo apt-get upgrade -y && sudo apt-g
 alias Huntsville-weather='ansiweather -l Huntsville,US'
 alias Tuscaloosa-weather='ansiweather -l Tuscaloosa,US'
 
-# Tagging
-retag()
-{
-   ctags --fields=+l `find -iname \*.h -o -iname \*.cxx -o -iname \*.cpp -o -iname \*.c -o -iname \*.hpp |grep -v \\.obj| grep -iv '3rdParty' | grep -v \\.build `
-}
-retaganubis()
-{
-   ctags --fields=+l `find -iname \*.h -o -iname \*.cxx -o -iname \*.cpp -o -iname \*.c -o -iname \*.hpp |grep -v 'include/'| grep -iv '3rdParty' | grep -v \\.build `
-}
+# Rust tags
+alias rtags='ctags -f .tags --options=$HOME/src/rustc-1.9.0/src/etc/ctags.rust --recurse ./src'
+

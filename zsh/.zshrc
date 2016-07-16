@@ -44,3 +44,5 @@ expand-or-complete-with-dots() {
 zle -N expand-or-complete-with-dots
 bindkey "^I" expand-or-complete-with-dots
 
+# Turn bell off:
+setterm -blength 0
