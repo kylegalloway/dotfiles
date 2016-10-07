@@ -11,8 +11,7 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
-export SUBLIME=subl
-export EDITOR="$SUBLIME --wait"
+export EDITOR="vim"
 export VISUAL=$EDITOR
 export LSCOLORS="exfxcxdxbxegedabagacad"
 export DEFAULT_USER=kgalloway
@@ -43,6 +42,3 @@ expand-or-complete-with-dots() {
 }
 zle -N expand-or-complete-with-dots
 bindkey "^I" expand-or-complete-with-dots
-
-# Turn bell off:
-setterm -blength 0

@@ -28,12 +28,13 @@ Plugin 'racer-rust/vim-racer'              " Rust auto completer
 Plugin 'rking/ag.vim'                      " Ag for Vim
 Plugin 'rust-lang/rust.vim'                " Rust maintained plugin
 Plugin 'SirVer/ultisnips'                  " UltiSnips
-Plugin 'terryma/vim-multiple-cursors'      " Multiple Cursors
+" Plugin 'terryma/vim-multiple-cursors'      " Multiple Cursors
 Plugin 'tpope/vim-commentary'              " Vim Commentary
+Plugin 'tpope/vim-fugitive'                " Vim Fugitive
 Plugin 'vim-airline/vim-airline'           " Vim Airline
 Plugin 'vim-airline/vim-airline-themes'    " Vim Airline
 if has("unix")
-   Plugin 'Valloric/YouCompleteMe'            " YouCompleteMe (linux only)
+   " Plugin 'Valloric/YouCompleteMe'            " YouCompleteMe (linux only)
 endif
 
 call vundle#end()
@@ -324,6 +325,7 @@ function! Semi(line_number)
    let cmd = "normal! mp" . a:line_number . "GmqA;\<esc>`q`p"
    execute cmd
 endfunction
+command! -nargs=1 Semi call s:Semi(<f-args>)
 
 " Toggle the linenumbers between relative and not
 function! ToggleNumberMode()
