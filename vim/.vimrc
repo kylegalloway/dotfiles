@@ -28,14 +28,10 @@ Plugin 'racer-rust/vim-racer'              " Rust auto completer
 Plugin 'rking/ag.vim'                      " Ag for Vim
 Plugin 'rust-lang/rust.vim'                " Rust maintained plugin
 Plugin 'SirVer/ultisnips'                  " UltiSnips
-" Plugin 'terryma/vim-multiple-cursors'      " Multiple Cursors
 Plugin 'tpope/vim-commentary'              " Vim Commentary
-Plugin 'tpope/vim-fugitive'                " Vim Fugitive
+Plugin 'tpope/vim-fugitive'                " Git for Vim
 Plugin 'vim-airline/vim-airline'           " Vim Airline
 Plugin 'vim-airline/vim-airline-themes'    " Vim Airline
-if has("unix")
-   " Plugin 'Valloric/YouCompleteMe'            " YouCompleteMe (linux only)
-endif
 
 call vundle#end()
 filetype plugin indent on
@@ -66,15 +62,46 @@ set guioptions-=T               " Removes top toolbar
 set guioptions-=r               " Removes right hand scroll bar
 set go-=L                       " Removes left hand scroll bar
 set background=dark
-colorscheme base16-default-dark
 set mouse=a                     " enable the mouse
 set number                      " always show line numbers
 set showmatch                   " highlight matching [{()}]
-set colorcolumn=100             " Sets a color column at 100 lines
+
+set colorcolumn=101             " Sets a color column at 101 characters
+match ErrorMsg '\%>101v.\+'     " Makes things past 101 characters look like errors
+
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Spaces & Tabs
+" Colorscheme (Only the ones I like)
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" colorscheme base16-atelier-dune
+colorscheme base16-atelier-forest
+" colorscheme base16-darktooth
+" colorscheme base16-default-dark
+" colorscheme base16-eighties
+" colorscheme base16-google-dark
+" colorscheme base16-hopscotch
+" colorscheme base16-ir-black
+" colorscheme base16-isotope
+" colorscheme base16-london-tube
+" colorscheme base16-macintosh
+" colorscheme base16-materia
+" colorscheme base16-monokai
+" colorscheme base16-pop
+" colorscheme base16-railscasts
+" colorscheme base16-seti-ui
+" colorscheme base16-solar-flare
+" colorscheme base16-solarized-dark
+" colorscheme base16-spacemacs
+" colorscheme base16-summerfruit-dark
+" colorscheme base16-tomorrow-night
+" colorscheme base16-twilight
+" colorscheme base16-unikitty-dark
+
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Spaces, Tabs, and Other Vim things
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set showmode                    " always show what mode we're currently editing in
 set nowrap                      " don't wrap lines
@@ -97,7 +124,13 @@ nnoremap ; :
 autocmd BufWritePre *.cxx :%s/\s\+$//e    " Auto-remove trailing spaces for cxx on save
 autocmd BufWritePre *.h :%s/\s\+$//e      " Auto-remove trailing spaces for headers on save
 autocmd BufWritePre *.rs :%s/\s\+$//e     " Auto-remove trailing spaces for rust files on save
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o "No auto-comment on next line
+autocmd BufWritePre *.vimrc :%s/\s\+$//e  " Auto-remove trailing spaces for vimrc on save
+
+" Don't autocomment when adding a new line after a comment
+augroup DisableAutoComments
+autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
+augroup END
+
 set nobackup noswapfile         " Don't use swap/backup because we use GitHub
 autocmd! bufwritepost .vimrc source %       " Autoreload vimrc on save
 
@@ -118,8 +151,8 @@ nmap <silent> <leader><space> :nohlsearch<CR>
 let g:airline_theme = 'base16'
 let g:airline_powerline_fonts=1
 let g:airline#extensions#branch#enabled  = 1
-let g:airline#extensions#tabline#enabled = 0 "Show buffers when only one tab open
-let g:airline#extensions#bufferline#enabled = 0 "Don't show buffer line
+let g:airline#extensions#tabline#enabled = 1 "Show buffers when only one tab open
+let g:airline#extensions#bufferline#enabled = 1 "Show buffer line
 set laststatus=2 "Show airline even when no splits are open
 
 
@@ -142,28 +175,6 @@ endif
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Code Completions with YouCompleteMe
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_collect_identifiers_from_tags_files = 0
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_global_ycm_extra_conf = dotfiles_dir . "/vim/ycm_extra_conf.py"
-" change to 1 when syntastic added
-let g:ycm_register_as_syntastic_checker = 0
-let g:ycm_key_invoke_completion = '<C-Space>'
-let g:ycm_key_list_select_completion = ['<C-h>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-l>', '<Up>']
-nnoremap <F5> :YcmForceCompileAndDiagnostics<cr>c
-nnoremap <F12> :YcmCompleter GoToDefinitionElseDeclaration<cr>
-nnoremap <leader>g :YcmCompleter GoTo<CR>
-nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-nnoremap <leader>pc :YcmCompleter GoToDeclaration<CR>
-nnoremap <leader>pd :YcmCompleter GoToDefinition<CR>
-nnoremap <leader>y :YcmForceCompileAndDiagnostics<cr>
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Gitgutter
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:gitgutter_sign_column_always = 1
@@ -181,10 +192,12 @@ vnoremap <leader>/ :Commentary<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<left>"
-let g:UltiSnipsJumpForwardTrigger  = "<right>"
-let g:UltiSnipsListSnippets="<c-l>"
-let g:UltiSnipsSnippetDirectories=[dotfiles_dir . '/vim/UltiSnips']
+let g:UltiSnipsJumpBackwardTrigger = "<Left>"
+let g:UltiSnipsJumpForwardTrigger  = "<Right>"
+let g:UltiSnipsListSnippets="<C-l>"
+let g:UltiSnipsSnippetsDir=expand(dotfiles_dir."/vim/UltiSnips")
+let g:UltiSnipsSnippetDirectories=[expand(dotfiles_dir . '/vim/UltiSnips')]
+let g:UltiSnipsUsePythonVersion = 2
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -212,7 +225,7 @@ inoremap Jk <esc>l
 vnoremap Jk <esc>l
 nmap <leader>w :w!<cr>          " leader-w is fast saves
 
-"Auto change directory to match current file ,cd
+"Auto change directory to match current file
 nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
 
 
@@ -222,24 +235,14 @@ nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
 set hidden                          " Allows buffers to be hidden when modified
 nmap <leader>T :enew<cr>            " To open a new empty buffer
 nmap <leader>h :bprevious<CR>       " Move to the previous buffer
-
-" Close the current buffer and move to the previous one
-" This replicates the idea of closing a tab
-noremap <leader>bq <c-^> :bd #<cr>
-
-" Show all open buffers and their status
-nmap <leader>bl :ls<CR>
+nmap <leader>l :bnext<CR>           " Move to the next buffer
+nmap <leader>] :pop<CR>             " Pop the last buffer off the stack
 
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Screen Splits
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Resize vsplit
-nmap <C-v> :vertical resize +5<cr>
-nmap 25 :vertical resize 40<cr>
-nmap 50 <c-w>=
-nmap 75 :vertical resize 120<cr>
 nmap vs :vsplit<cr>
 nmap hs :split<cr>
 set splitright " Open splits on the right
@@ -261,19 +264,12 @@ nnoremap k gk
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Vim Multiple Cursors
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:multi_cursor_use_default_mapping=0
-let g:multi_cursor_next_key='<C-n>'
-let g:multi_cursor_prev_key='<C-p>'
-let g:multi_cursor_skip_key='<C-x>'
-let g:multi_cursor_quit_key='<Esc>'
-
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " C++ Specific
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" switches current line from forward reference to an include
+nmap <F1> V:s/class \(.*\);/#include <\1.h>/<CR>:nohlsearch<CR>
+" and vice versa
+nmap <F2> V:s/# *include *<\([^ \.]*\)\.*h*>/class \1;/<CR>:nohlsearch<CR>
 " navigate between fake/implementation
 map <F5> <Esc>:pyfile ~/.vim/python/toggleFake.py<CR>
 " navigate between abstract/implementation
@@ -301,8 +297,8 @@ let g:autotagTagsFile=".tags"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Makes long lines appear in error highlighting.
 function! ColorizeBadStyles()
-   set colorcolumn=100
-   match ErrorMsg '\%>99v.\+'
+   set colorcolumn=101
+   match ErrorMsg '\%>100v.\+'
 endfunction
 
 command! ColorizeBadStyles call ColorizeBadStyles()
@@ -320,12 +316,11 @@ nnoremap <leader>' viw<esc>a"<esc>hbi"<esc>"lel
 nnoremap <leader>; mqA;<esc>`q
 
 " Put a semicolon at the end of \a line_number without moving cursor
-" Not sure how this works...see JDD
 function! Semi(line_number)
    let cmd = "normal! mp" . a:line_number . "GmqA;\<esc>`q`p"
    execute cmd
 endfunction
-command! -nargs=1 Semi call s:Semi(<f-args>)
+command! -nargs=1 Semi call Semi(<f-args>)
 
 " Toggle the linenumbers between relative and not
 function! ToggleNumberMode()
@@ -350,3 +345,31 @@ noremap q <Nop>
 
 " search for merge comments
 nmap <leader>gm /=======\\|>>>>>>>\\|<<<<<<<<CR>
+
+" Instead of toggling Upper to Lower, ~ will now toggle through Upper, Lower and Title cases
+function! TwiddleCase(str)
+  if a:str ==# toupper(a:str)
+    let result = tolower(a:str)
+  elseif a:str ==# tolower(a:str)
+    let result = substitute(a:str,'\(\<\w\+\>\)', '\u\1', 'g')
+  else
+    let result = toupper(a:str)
+  endif
+  return result
+endfunction
+vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgvl
+
+" Loads of undo
+if v:version >= 703
+   set undofile
+   set undodir=/tmp
+endif
+
+" This highlights TODO/NOTE/ETC
+augroup vimrc_todo
+    au!
+    au Syntax * syn match MyTodo /\v<(FIXME|NOTE|TODO|OPTIMIZE|XXX):/
+          \ containedin=.*Comment,vimCommentTitle
+augroup END
+hi def link MyTodo Todo
+
