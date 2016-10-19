@@ -33,7 +33,7 @@ alias fixssh='eval "$(ssh-agent -s)";ssh-add'
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
-alias updateall="sudo apt-get update -y && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y && sudo apt-get autoremove"
+alias updateall="sudo apt-get update -y && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y && sudo apt-get autoremove -y"
 
 # Weather
 alias Huntsville-weather='ansiweather -l Huntsville,US'

@@ -28,14 +28,10 @@ Plugin 'racer-rust/vim-racer'              " Rust auto completer
 Plugin 'rking/ag.vim'                      " Ag for Vim
 Plugin 'rust-lang/rust.vim'                " Rust maintained plugin
 Plugin 'SirVer/ultisnips'                  " UltiSnips
-" Plugin 'terryma/vim-multiple-cursors'      " Multiple Cursors
 Plugin 'tpope/vim-commentary'              " Vim Commentary
 Plugin 'tpope/vim-fugitive'                " Vim Fugitive
 Plugin 'vim-airline/vim-airline'           " Vim Airline
 Plugin 'vim-airline/vim-airline-themes'    " Vim Airline
-if has("unix")
-   " Plugin 'Valloric/YouCompleteMe'            " YouCompleteMe (linux only)
-endif
 
 call vundle#end()
 filetype plugin indent on
@@ -70,7 +66,8 @@ colorscheme base16-default-dark
 set mouse=a                     " enable the mouse
 set number                      " always show line numbers
 set showmatch                   " highlight matching [{()}]
-set colorcolumn=100             " Sets a color column at 100 lines
+set colorcolumn=101             " Sets a color column at 100 lines
+match ErrorMsg '\%>100v.\+'
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -97,7 +94,12 @@ nnoremap ; :
 autocmd BufWritePre *.cxx :%s/\s\+$//e    " Auto-remove trailing spaces for cxx on save
 autocmd BufWritePre *.h :%s/\s\+$//e      " Auto-remove trailing spaces for headers on save
 autocmd BufWritePre *.rs :%s/\s\+$//e     " Auto-remove trailing spaces for rust files on save
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o "No auto-comment on next line
+
+" Don't autocomment when adding a new line after a comment
+augroup DisableAutoComments
+autocmd BufNewFile,BufRead,FileType * setlocal formatoptions-=cro
+augroup END
+
 set nobackup noswapfile         " Don't use swap/backup because we use GitHub
 autocmd! bufwritepost .vimrc source %       " Autoreload vimrc on save
 
@@ -139,28 +141,6 @@ if executable('ag')
    set grepprg=ag\ --nogroup\ --nocolor
    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Code Completions with YouCompleteMe
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_collect_identifiers_from_tags_files = 0
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_global_ycm_extra_conf = dotfiles_dir . "/vim/ycm_extra_conf.py"
-" change to 1 when syntastic added
-let g:ycm_register_as_syntastic_checker = 0
-let g:ycm_key_invoke_completion = '<C-Space>'
-let g:ycm_key_list_select_completion = ['<C-h>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-l>', '<Up>']
-nnoremap <F5> :YcmForceCompileAndDiagnostics<cr>c
-nnoremap <F12> :YcmCompleter GoToDefinitionElseDeclaration<cr>
-nnoremap <leader>g :YcmCompleter GoTo<CR>
-nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-nnoremap <leader>pc :YcmCompleter GoToDeclaration<CR>
-nnoremap <leader>pd :YcmCompleter GoToDefinition<CR>
-nnoremap <leader>y :YcmForceCompileAndDiagnostics<cr>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -235,13 +215,6 @@ nmap <leader>bl :ls<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Screen Splits
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Resize vsplit
-nmap <C-v> :vertical resize +5<cr>
-nmap 25 :vertical resize 40<cr>
-nmap 50 <c-w>=
-nmap 75 :vertical resize 120<cr>
-nmap vs :vsplit<cr>
-nmap hs :split<cr>
 set splitright " Open splits on the right
 set splitbelow " Open splits at the bottom
 
@@ -258,17 +231,6 @@ map <C-k> <C-w>k
 " Down is really the next line
 nnoremap j gj
 nnoremap k gk
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Vim Multiple Cursors
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:multi_cursor_use_default_mapping=0
-let g:multi_cursor_next_key='<C-n>'
-let g:multi_cursor_prev_key='<C-p>'
-let g:multi_cursor_skip_key='<C-x>'
-let g:multi_cursor_quit_key='<Esc>'
-
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -300,18 +262,14 @@ let g:autotagTagsFile=".tags"
 " OTHER
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Makes long lines appear in error highlighting.
-function! ColorizeBadStyles()
-   set colorcolumn=100
-   match ErrorMsg '\%>99v.\+'
-endfunction
+" Uncomment and remove from above if it becomes annoying
+" function! ColorizeBadStyles()
+"    set colorcolumn=101
+"    match ErrorMsg '\%>100v.\+'
+" endfunction
 
-command! ColorizeBadStyles call ColorizeBadStyles()
-nnoremap <silent> <F3> :call ColorizeBadStyles()<CR>
-
-" Don't autocomment when adding a new line after a comment
-augroup DisableAutoComments
-autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
-augroup END
+" command! ColorizeBadStyles call ColorizeBadStyles()
+" nnoremap <silent> <F3> :call ColorizeBadStyles()<CR>
 
 " Surround a word in quotes
 nnoremap <leader>' viw<esc>a"<esc>hbi"<esc>"lel
@@ -320,7 +278,7 @@ nnoremap <leader>' viw<esc>a"<esc>hbi"<esc>"lel
 nnoremap <leader>; mqA;<esc>`q
 
 " Put a semicolon at the end of \a line_number without moving cursor
-" Not sure how this works...see JDD
+" use by :Semi <n> where n is the line number
 function! Semi(line_number)
    let cmd = "normal! mp" . a:line_number . "GmqA;\<esc>`q`p"
    execute cmd
