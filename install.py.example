@@ -1,0 +1,49 @@
+#!/usr/bin/env python
+# Kyle Galloway 2016
+
+import os
+import shutil
+import sys
+
+base_dir = os.path.dirname(os.path.abspath(__file__))
+
+def copyUserFilesForWindows():
+   home_directory = os.environ['USERPROFILE']
+   gitconfig_location = os.path.join(home_directory, '.gitconfig')
+   bashrc_location = os.path.join(home_directory, '.bashrc')
+   ctags_location = os.path.join(home_directory, '.ctags')
+   shutil.copy('gitconfig', gitconfig_location)
+   shutil.copy('bashrc', bashrc_location)
+   shutil.copy('ctags', ctags_location)
+
+def symlinkUserFilesForLinux():
+   gitconfig_dotfile_path = os.path.join(base_dir, 'gitconfig')
+   gitconfig_path = os.path.join(os.environ['HOME'], '.gitconfig')
+   if os.path.exists(gitconfig_path):
+      print 'Removing existing gitconfig symlink: %s' % gitconfig_path
+      os.unlink(gitconfig_path)
+   os.symlink(gitconfig_dotfile_path, gitconfig_path)
+
+   bashrc_dotfile_path = os.path.join(base_dir, 'bashrc')
+   bashrc_path = os.path.join(os.environ['HOME'], '.bashrc')
+   if os.path.exists(bashrc_path):
+      print 'Removing existing bashrc symlink: %s' % bashrc_path
+      os.unlink(bashrc_path)
+   os.symlink(bashrc_dotfile_path, bashrc_path)
+
+   ctags_dotfile_path = os.path.join(base_dir, 'ctags')
+   ctags_path = os.path.join(os.environ['HOME'], '.ctags')
+   if os.path.exists(ctags_path):
+      print 'Removing existing ctags symlink: %s' % ctags_path
+      os.unlink(ctags_path)
+   os.symlink(ctags_dotfile_path, ctags_path)
+
+if __name__ == '__main__':
+   if sys.platform.startswith('win'):
+      copyUserFilesForWindows()
+      print "Finished!"
+   elif sys.platform.startswith('linux'):
+      symlinkUserFilesForLinux()
+      print "Finished!"
+   else:
+      print 'OS %s not supported' % sys.platform
