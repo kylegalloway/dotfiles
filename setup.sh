@@ -3,7 +3,7 @@
 # setup.sh
 # 
 
-DOTFILES=$HOME/Repos/dotfiles
+DOTFILES="$HOME"/Repos/dotfiles
 
 install_pkg() {
     echo -e "\033[1;33m Installing ${1}... \033[0m"
@@ -34,44 +34,44 @@ zsh_use() {
 }
 
 oh_my_zsh_setup(){
-    git clone https://github.com/robbyrussell/oh-my-zsh.git $HOME/.oh-my-zsh
+    git clone https://github.com/robbyrussell/oh-my-zsh.git "$HOME"/.oh-my-zsh
 }
 
 symlink() {
-  cd $HOME
+  cd "$HOME" || exit
   ORG=$1
   DST=$2
   echo "Symlinking: ${ORG} -> ${DST}"
-  if [ -f $DST ]; then
-    mv $DST ${DST}.bak
+  if [[ -f $DST ]]; then
+    mv "$DST" "${DST}".bak
   fi
-  rm -f $DST
-  ln -s $ORG $DST
-  cd - >/dev/null 2>&1
+  rm -f "$DST"
+  ln -s "$ORG" "$DST"
+  cd - >/dev/null 2>&1 || exit
 }
 
 do_symlinking(){
-    cd $DOTFILES
+    cd "$DOTFILES" || exit
     for f in ./.* ; do
-        BASENAME=$(basename $f)
-        if [ $BASENAME != ".." ] || [ $BASENAME != "." ] || [ $BASENAME != ".git" ] || [ $BASENAME != ".gitignore" ]; then 
-		symlink $f "${HOME}/$(basename $f)"
+        BASENAME=$(basename "$f")
+        if [ "$BASENAME" != ".." ] || [ "$BASENAME" != "." ] || [ "$BASENAME" != ".git" ] || [ "$BASENAME" != ".gitignore" ]; then 
+		symlink "$f" "${HOME}/$(basename "$f")"
 	fi
     done
 }
 
 setup_repos(){
-    mkdir -p $HOME/Repos
-    git clone https://github.com/kylegalloway/dotfiles.git $HOME/Repos/dotfiles
-    git clone  https://github.com/simonwhitaker/gibo $HOME/Repos/gibo
+    mkdir -p "$HOME"/Repos
+    git clone https://github.com/kylegalloway/dotfiles.git "$HOME"/Repos/dotfiles
+    git clone  https://github.com/simonwhitaker/gibo "$HOME"/Repos/gibo
 }
 
 dotfile_setup(){
-    cd $DOTFILES
+    cd "$DOTFILES" || exit
     for f in ./.* ; do
-        BASENAME=$(basename $f)
-        if [ $BASENAME != ".." ] || [ $BASENAME != "." ] || [ $BASENAME != ".git" ] || [ $BASENAME != ".gitignore" ]; then 
-		cp $f "${HOME}/$(basename $f)"
+        BASENAME=$(basename "$f")
+        if [ "$BASENAME" != ".." ] || [ "$BASENAME" != "." ] || [ "$BASENAME" != ".git" ] || [ "$BASENAME" != ".gitignore" ]; then 
+		cp "$f" "${HOME}/$(basename "$f")"
 	fi
     done
 }
