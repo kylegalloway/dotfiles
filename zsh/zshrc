@@ -42,3 +42,6 @@ expand-or-complete-with-dots() {
 }
 zle -N expand-or-complete-with-dots
 bindkey "^I" expand-or-complete-with-dots
+
+# This is amazing, it shows progress for processes longer than the given number of seconds
+REPORTTIME=10

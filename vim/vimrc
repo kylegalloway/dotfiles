@@ -315,6 +315,13 @@ function! Semi(line_number)
 endfunction
 command! -nargs=1 Semi call Semi(<f-args>)
 
+" Use to get the last n git log messages
+function! Gitlog(n)
+   let cmd = ".!git log --oneline -n " . a:n
+   execute cmd
+endfunction
+command! -nargs=1 Gitlog call Gitlog(<f-args>)
+
 " Toggle the linenumbers between relative and not
 function! ToggleNumberMode()
    if(&relativenumber==1)
