@@ -25,15 +25,15 @@ change_shell() {
 zsh_use() {
     install_pkg zsh
     change_shell zsh
+}
+
+oh_my_zsh_setup(){
     echo "installing oh-my-zsh"
     if which wget &>/dev/null; then
         wget --no-check-certificate http://install.ohmyz.sh -O - | sh
     else
         curl -L http://install.ohmyz.sh | sh
     fi
-}
-
-oh_my_zsh_setup(){
     git clone https://github.com/robbyrussell/oh-my-zsh.git "$HOME"/.oh-my-zsh
 }
 
@@ -78,8 +78,8 @@ dotfile_setup(){
 
 basic_setup() {
     echo -e "\033[1;30m- running basic setup..."
-#     sudo apt-get update &>/dev/null
-#     install_pkg git
+     sudo apt-get update &>/dev/null
+     install_pkg git
 #     install_pkg tlp ppa:linrunner/tlp
 #     install_pkg xorg
 #     install_pkg network-manager
@@ -93,7 +93,7 @@ basic_setup() {
 #     install_pkg spectrwm
 #     install_pkg conky-cli
 #     install_pkg thermald
-#     install_pkg vim
+     install_pkg vim
 #     install_pkg rxvt-unicode-256color
 #     install_pkg surf
 #     install_pkg gcc
@@ -112,7 +112,7 @@ basic_setup() {
 #     install_pkg python-pip
 #     install_pkg python-dev
 #     install_pkg build-essential
-#     zsh_use
+     zsh_use
 #     oh_my_zsh_setup
 #     setup_repos
 #     do_symlinking

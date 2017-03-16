@@ -45,3 +45,4 @@ bindkey "^I" expand-or-complete-with-dots
 
 # This is amazing, it shows progress for processes longer than the given number of seconds
 REPORTTIME=10
+export RUST_SRC_PATH=${HOME}/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src
