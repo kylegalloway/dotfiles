@@ -1,0 +1,31 @@
+#!/bin/bash
+# General Aliases
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+
+# Movement
+alias ll="ls -lh"
+alias la="ls -al"
+alias gohome="cd ~;clear;"
+alias gowork="cd /mnt/d/work;clear;"
+
+# Git
+alias pullall="find . -mindepth 1 -maxdepth 1 -type d -print -exec git -C {} pull \;"
+alias checkall="find . -mindepth 1 -maxdepth 1 -type d -print -exec git -C {} status \;"
+alias gitupdate='git add --all; git commit -am "update"; git push'
+alias fixgitignore='git rm --cached `git ls-files -i --exclude-from=.gitignore`'
+alias ga='git add'
+alias gaa='git add --all'
+alias gcmsg='git commit -m'
+alias gcamsg='git commit -am'
+alias gl='git pull'
+alias glr='git pull --rebase'
+alias gp='git push'
+alias gst='git status'
+alias fixssh='eval "$(ssh-agent -s)";ssh-add'
+
+# General
+alias updateall="sudo apt-get update -y && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y && sudo apt-get autoremove -y"
+
