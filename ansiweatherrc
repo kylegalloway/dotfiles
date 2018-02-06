@@ -12,7 +12,7 @@ symbols:true
 show_wind:true
 show_humidity:true
 show_pressure:true
-show_daylight:true
+daylight:true
 dateformat:%a %b %d
 timeformat:%b %d %r
 

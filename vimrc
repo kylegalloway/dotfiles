@@ -20,12 +20,13 @@ else
 endif
 
 call vundle#begin(vundlepath)
+" Vundle
 Plugin 'gmarik/Vundle.vim'                 " Let Vundle manage itself
 
+" Plugins
 Plugin 'ain/vim-npm'                       " Adds Npm commands
-Plugin 'airblade/vim-gitgutter'            " Displays gitgutter
+Plugin 'mhinz/vim-signify'                 " Adds source control gutter
 Plugin 'tpope/vim-commentary'              " Vim Commentary
-Plugin 'tpope/vim-fugitive'                " Git for Vim
 Plugin 'Valloric/vim-indent-guides'        " See the spaces (and tabs)
 Plugin 'vim-airline/vim-airline'           " Vim Airline
 Plugin 'vim-airline/vim-airline-themes'    " Vim Airline
@@ -199,6 +200,12 @@ set splitbelow " Open splits at the bottom
 " Typescript
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:typescript_indent_disable = 1
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Signify
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:signify_vcs_list = [ 'git', 'tfs' ]
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
