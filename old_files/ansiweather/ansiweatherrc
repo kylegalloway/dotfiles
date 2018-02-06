@@ -1,14 +1,17 @@
 # .ansiweatherrc example showing all available options
+# https://github.com/fcambus/ansiweather
 
 api_key:85a4e3c55b73909f42c6a23ec35b7147
 fetch_cmd:curl -sf
 # location:Rzeszow,PL
 location:Huntsville,US
-# units:metric
-units:imperial
+units:metric
 # forecast:0
 forecast:5
-daylight:false
+show_daylight:true
+show_wind:true
+show_humidity:true
+show_pressure:true
 ansi:true
 symbols:true
 dateformat:%a %b %d
