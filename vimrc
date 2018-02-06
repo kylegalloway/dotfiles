@@ -20,18 +20,21 @@ else
 endif
 
 call vundle#begin(vundlepath)
+Plugin 'gmarik/Vundle.vim'                 " Let Vundle manage itself
+
 Plugin 'ain/vim-npm'                       " Adds Npm commands
 Plugin 'airblade/vim-gitgutter'            " Displays gitgutter
-Plugin 'chriskempson/base16-vim'           " Base16 Color Schemes
-Plugin 'ctrlpvim/ctrlp.vim'                " Ctrl-P
-Plugin 'gmarik/Vundle.vim'                 " Vundle
-Plugin 'leafgarland/typescript-vim'        " Typescript syntax
-Plugin 'SirVer/ultisnips'                  " UltiSnips
 Plugin 'tpope/vim-commentary'              " Vim Commentary
 Plugin 'tpope/vim-fugitive'                " Git for Vim
 Plugin 'Valloric/vim-indent-guides'        " See the spaces (and tabs)
 Plugin 'vim-airline/vim-airline'           " Vim Airline
 Plugin 'vim-airline/vim-airline-themes'    " Vim Airline
+
+" Syntax
+Plugin 'leafgarland/typescript-vim'        " Typescript syntax
+
+" Colorschemes
+Plugin 'chriskempson/base16-vim'           " Base16 Color Schemes
 
 call vundle#end()
 filetype plugin indent on
@@ -45,116 +48,48 @@ filetype plugin indent on
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Typescript
+" Leader Shortcuts - keep at top
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:typescript_indent_disable = 1
+let mapleader=","               " leader is comma
+let g:mapleader = ","           " leader is comma in gvim
+" Remap all combos of j & k to be escape seq.
+" Then, move to position after so it acts like expected.
+inoremap kj <esc>l
+vnoremap kj <esc>l
+inoremap kJ <esc>l
+vnoremap kJ <esc>l
+inoremap KJ <esc>l
+vnoremap KJ <esc>l
+inoremap Kj <esc>l
+vnoremap Kj <esc>l
+inoremap jk <esc>l
+vnoremap jk <esc>l
+inoremap jK <esc>l
+vnoremap jK <esc>l
+inoremap JK <esc>l
+vnoremap JK <esc>l
+inoremap Jk <esc>l
+vnoremap Jk <esc>l
+nmap <leader>w :w!<CR>          " leader-w is fast saves
 
+"Auto change directory to match current file
+nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Gitgutter
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:gitgutter_sign_column_always = 1
+" Map the buffer movement keys to ctrl + the regular movement keys
+" (It's way easier to switch buffers this way)
+map <C-l> <C-w>l
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+" Down is really the next line
+nnoremap j gj
+nnoremap k gk
 
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Ctrl P
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set wildignore+=*/.build/*                   " Ignore files in .build
-set wildignore+=*.moc                        " Ignore moc files
-let g:ctrlp_dotfiles = 0                     " Ignore dotfiles
-let g:ctrlp_switch_buffer = 0
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_lazy_update = 1                  " Only update after typing finishes
-let g:ctrlp_by_filename = 1                  " Search by filename instead of path
-let g:ctrlp_root_markers = '.git'
-let g:ctrlp_custom_ignore = {
-   \ 'dir': '\v[\/]\.(git|hg|svn|build)$',
-   \ 'file': '\v\.(a|so|lib)$',
-   \ }
-if executable('ag')
-   set grepprg=ag\ --nogroup\ --nocolor
-   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-endif
-
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Colorscheme (Only the ones I like)
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Fix the base16 colors
-if filereadable(expand("~/.vimrc_background"))
-   let base16colorspace=256
-   source ~/.vimrc_background
-endif
-
-" colorscheme base16-atelier-dune
-colorscheme base16-atelier-forest
-" colorscheme base16-darktooth
-" colorscheme base16-default-dark
-" colorscheme base16-eighties
-" colorscheme base16-google-dark
-" colorscheme base16-hopscotch
-" colorscheme base16-ir-black
-" colorscheme base16-isotope
-" colorscheme base16-london-tube
-" colorscheme base16-macintosh
-" colorscheme base16-materia
-" colorscheme base16-monokai
-" colorscheme base16-pop
-" colorscheme base16-railscasts
-" colorscheme base16-seti-ui
-" colorscheme base16-solar-flare
-" colorscheme base16-solarized-dark
-" colorscheme base16-spacemacs
-" colorscheme base16-summerfruit-dark
-" colorscheme base16-tomorrow-night
-" colorscheme base16-twilight
-" colorscheme base16-unikitty-dark
-
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" UltiSnips
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:UltiSnipsEditSplit="horizontal"
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<Left>"
-let g:UltiSnipsJumpForwardTrigger  = "<Right>"
-let g:UltiSnipsListSnippets="<C-l>"
-let g:UltiSnipsSnippetsDir=expand(dotfiles_dir."/vim/UltiSnips")
-let g:UltiSnipsSnippetDirectories=[expand(dotfiles_dir . '/vim/UltiSnips')]
-let g:UltiSnipsUsePythonVersion = 3
-
-" Coloring the popup menu
-" highlight Pmenu ctermfg=0 ctermbg=2
-" highlight PmenuSel ctermfg=0 ctermbg=7
-" highlight PmenuSbar ctermfg=0 ctermbg=7
-" highlight PmenuThumb ctermfg=0 ctermbg=7
-
-" highlight Pmenu guibg=darkgray gui=bold
-" highlight Pmenu ctermbg=darkgray ctermfg=white gui=bold
-" highlight PmenuSel ctermbg=lightgray ctermfg=black gui=bold
-
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Vim Commentary
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <leader>/ :Commentary<CR>
-vnoremap <leader>/ :Commentary<CR>
-
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Airline
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:airline_theme = 'base16'
-let g:airline_powerline_fonts=1
-let g:airline#extensions#branch#enabled  = 1
-let g:airline#extensions#tabline#enabled = 1 "Show buffers when only one tab open
-let g:airline#extensions#bufferline#enabled = 1 "Show buffer line
-set laststatus=2 "Show airline even when no splits are open
-
+" Disable arrow movement, resize splits instead.
+nnoremap <Up>    :resize +2<CR>
+nnoremap <Down>  :resize -2<CR>
+nnoremap <Left>  :vertical resize +2<CR>
+nnoremap <Right> :vertical resize -2<CR>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -175,7 +110,8 @@ set guioptions-=T               " Removes top toolbar
 set guioptions-=r               " Removes right hand scroll bar
 set go-=L                       " Removes left hand scroll bar
 set background=dark
-set mouse=a                     " enable the mouse
+" set mouse=a                   " enable the mouse
+set mouse=                      " disable the mouse
 set number                      " always show line numbers
 set showmatch                   " highlight matching [{()}]
 
@@ -241,35 +177,6 @@ nmap <silent> <leader><space> :nohlsearch<CR>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Leader Shortcuts
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let mapleader=","               " leader is comma
-let g:mapleader = ","           " leader is comma in gvim
-" Remap all combos of j & k to be escape seq.
-" Then, move to position after so it acts like expected.
-inoremap kj <esc>l
-vnoremap kj <esc>l
-inoremap kJ <esc>l
-vnoremap kJ <esc>l
-inoremap KJ <esc>l
-vnoremap KJ <esc>l
-inoremap Kj <esc>l
-vnoremap Kj <esc>l
-inoremap jk <esc>l
-vnoremap jk <esc>l
-inoremap jK <esc>l
-vnoremap jK <esc>l
-inoremap JK <esc>l
-vnoremap JK <esc>l
-inoremap Jk <esc>l
-vnoremap Jk <esc>l
-nmap <leader>w :w!<CR>          " leader-w is fast saves
-
-"Auto change directory to match current file
-nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Buffers
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set hidden                          " Allows buffers to be hidden when modified
@@ -289,23 +196,69 @@ set splitbelow " Open splits at the bottom
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Movement
+" Typescript
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Map the buffer movement keys to ctrl + the regular movement keys
-" (It's way easier to switch buffers this way)
-map <C-l> <C-w>l
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-" Down is really the next line
-nnoremap j gj
-nnoremap k gk
+let g:typescript_indent_disable = 1
 
-" Disable arrow movement, resize splits instead.
-nnoremap <Up>    :resize +2<CR>
-nnoremap <Down>  :resize -2<CR>
-nnoremap <Left>  :vertical resize +2<CR>
-nnoremap <Right> :vertical resize -2<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Gitgutter
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:gitgutter_sign_column_always = 1
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Colorscheme (Only the ones I like)
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Fix the base16 colors
+if filereadable(expand("~/.vimrc_background"))
+   let base16colorspace=256
+   source ~/.vimrc_background
+endif
+
+" colorscheme base16-atelier-dune
+colorscheme base16-atelier-forest
+" colorscheme base16-darktooth
+" colorscheme base16-default-dark
+" colorscheme base16-eighties
+" colorscheme base16-google-dark
+" colorscheme base16-hopscotch
+" colorscheme base16-ir-black
+" colorscheme base16-isotope
+" colorscheme base16-london-tube
+" colorscheme base16-macintosh
+" colorscheme base16-materia
+" colorscheme base16-monokai
+" colorscheme base16-pop
+" colorscheme base16-railscasts
+" colorscheme base16-seti-ui
+" colorscheme base16-solar-flare
+" colorscheme base16-solarized-dark
+" colorscheme base16-spacemacs
+" colorscheme base16-summerfruit-dark
+" colorscheme base16-tomorrow-night
+" colorscheme base16-twilight
+" colorscheme base16-unikitty-dark
+
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Vim Commentary
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+noremap <leader>/ :Commentary<CR>
+
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Airline
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:airline_theme = 'base16'
+let g:airline_powerline_fonts=1
+let g:airline#extensions#branch#enabled  = 1
+let g:airline#extensions#tabline#enabled = 1 "Show buffers when only one tab open
+let g:airline#extensions#bufferline#enabled = 1 "Show buffer line
+set laststatus=2 "Show airline even when no splits are open
+
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
