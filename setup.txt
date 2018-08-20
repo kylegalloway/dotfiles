@@ -1,0 +1,4 @@
+run python installfonts.py
+link vimrc, bashrc, zshrc, and zpreztorc
+install git, vim, curl, zsh, zprezto (git), and vundle (git)
+fix colors if necessary
