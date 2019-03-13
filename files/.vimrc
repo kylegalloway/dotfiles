@@ -35,7 +35,7 @@ Plugin 'vim-airline/vim-airline-themes'    " Vim Airline
 Plugin 'leafgarland/typescript-vim'        " Typescript syntax
 
 " Colorschemes
-Plugin 'chriskempson/base16-vim'           " Base16 Color Schemes
+" Plugin 'chriskempson/base16-vim'           " Base16 Color Schemes
 
 call vundle#end()
 filetype plugin indent on
@@ -218,13 +218,13 @@ let g:gitgutter_sign_column_always = 1
 " Colorscheme (Only the ones I like)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Fix the base16 colors
-if filereadable(expand("~/.vimrc_background"))
-   let base16colorspace=256
-   source ~/.vimrc_background
-endif
+" if filereadable(expand("~/.vimrc_background"))
+"    let base16colorspace=256
+"    source ~/.vimrc_background
+" endif
 
 " colorscheme base16-atelier-dune
-colorscheme base16-atelier-forest
+" colorscheme base16-atelier-forest
 " colorscheme base16-darktooth
 " colorscheme base16-default-dark
 " colorscheme base16-eighties
@@ -252,7 +252,7 @@ colorscheme base16-atelier-forest
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vim Commentary
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-noremap <leader>/ :Commentary<CR>
+noremap <leader>/ :Commentary<cr>
 
 
 

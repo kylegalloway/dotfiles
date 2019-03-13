@@ -1,7 +1,7 @@
 [push]
 	default = simple
 [user]
-	email = kyle.galloway.1993@gmail.com
+	email = kyle.galloway@cfdrc.com
 	name = Kyle Galloway
 [core]
         editor = vim
