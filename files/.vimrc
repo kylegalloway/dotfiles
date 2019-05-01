@@ -34,9 +34,6 @@ Plugin 'vim-airline/vim-airline-themes'    " Vim Airline
 " Syntax
 Plugin 'leafgarland/typescript-vim'        " Typescript syntax
 
-" Colorschemes
-" Plugin 'chriskempson/base16-vim'           " Base16 Color Schemes
-
 call vundle#end()
 filetype plugin indent on
 " Vundle Help
@@ -215,37 +212,27 @@ let g:gitgutter_sign_column_always = 1
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Colorscheme (Only the ones I like)
+" Colorscheme
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Fix the base16 colors
-" if filereadable(expand("~/.vimrc_background"))
-"    let base16colorspace=256
-"    source ~/.vimrc_background
-" endif
-
-" colorscheme base16-atelier-dune
-" colorscheme base16-atelier-forest
-" colorscheme base16-darktooth
-" colorscheme base16-default-dark
-" colorscheme base16-eighties
-" colorscheme base16-google-dark
-" colorscheme base16-hopscotch
-" colorscheme base16-ir-black
-" colorscheme base16-isotope
-" colorscheme base16-london-tube
-" colorscheme base16-macintosh
-" colorscheme base16-materia
-" colorscheme base16-monokai
-" colorscheme base16-pop
-" colorscheme base16-railscasts
-" colorscheme base16-seti-ui
-" colorscheme base16-solar-flare
-" colorscheme base16-solarized-dark
-" colorscheme base16-spacemacs
-" colorscheme base16-summerfruit-dark
-" colorscheme base16-tomorrow-night
-" colorscheme base16-twilight
-" colorscheme base16-unikitty-dark
+" Built-in
+" colorscheme blue
+" colorscheme default
+" colorscheme desert
+" colorscheme evening
+" colorscheme koehler
+" colorscheme murphy
+" colorscheme peachpuff
+" colorscheme ron
+" colorscheme slate
+" colorscheme zellner
+" colorscheme darkblue
+" colorscheme delek
+" colorscheme elflord
+" colorscheme industry
+" colorscheme morning
+" colorscheme pablo
+" colorscheme shine
+" colorscheme torte
 
 
 

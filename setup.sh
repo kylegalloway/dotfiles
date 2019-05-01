@@ -115,7 +115,7 @@ basic_setup() {
 #     zsh_use
 #     oh_my_zsh_setup
 #     setup_repos
-#     do_symlinking
+     do_symlinking
 #     dotfile_setup
     echo -e "\033[1;30m- Done!!..."
 }

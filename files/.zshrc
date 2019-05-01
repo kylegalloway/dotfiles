@@ -33,13 +33,3 @@ bindkey "^I" expand-or-complete-with-dots
 # This is amazing, it shows progress for processes longer than the given number of seconds
 REPORTTIME=10
 
-# This is for base16 colors
-BASE16_SHELL=$HOME/.config/base16-shell/
-BASE16_THEME=base16_atelier-forest
-[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
-
-# Source nvm
-if [ -r ~/.nvm ]; then
-   export NVM_DIR="$HOME/.nvm"
-   [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-fi
