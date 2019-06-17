@@ -326,6 +326,17 @@ function! TwiddleCase(str)
 endfunction
 vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgvl
 
+" Insert the current date or time
+" Date
+:nnoremap <F5> "=strftime("%Y-%m-%d")<CR>P
+:inoremap <F5> <C-R>=strftime("%Y-%m-%d")<CR>
+" Date and Time
+:nnoremap <F6> "=strftime("%Y-%m-%d %X")<CR>P
+:inoremap <F6> <C-R>=strftime("%Y-%m-%d %X")<CR>
+
+" Edit todo.txt
+nnoremap <leader>td :vsplit $HOME/Repos/todo/todo.txt<CR>
+
 " Loads of undo
 " if v:version >= 703
 "    set undofile
