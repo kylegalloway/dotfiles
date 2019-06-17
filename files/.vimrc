@@ -31,9 +31,6 @@ Plugin 'Valloric/vim-indent-guides'        " See the spaces (and tabs)
 Plugin 'vim-airline/vim-airline'           " Vim Airline
 Plugin 'vim-airline/vim-airline-themes'    " Vim Airline
 
-" Syntax
-Plugin 'leafgarland/typescript-vim'        " Typescript syntax
-
 call vundle#end()
 filetype plugin indent on
 " Vundle Help
@@ -152,6 +149,9 @@ autocmd BufWritePre *.less :%s/\s\+$//e    " Auto-remove trailing spaces for les
 autocmd BufWritePre *.html :%s/\s\+$//e    " Auto-remove trailing spaces for html on save
 autocmd BufWritePre *.h :%s/\s\+$//e      " Auto-remove trailing spaces for headers on save
 autocmd BufWritePre *.vimrc :%s/\s\+$//e  " Auto-remove trailing spaces for vimrc on save
+
+" Add syntax highlighting for todo.txt
+autocmd BufRead,BufNewFile todo.txt set filetype=todo
 
 " Don't autocomment when adding a new line after a comment
 augroup DisableAutoComments
