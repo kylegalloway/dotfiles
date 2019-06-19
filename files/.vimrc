@@ -30,6 +30,7 @@ Plugin 'tpope/vim-commentary'              " Vim Commentary
 Plugin 'Valloric/vim-indent-guides'        " See the spaces (and tabs)
 Plugin 'vim-airline/vim-airline'           " Vim Airline
 Plugin 'vim-airline/vim-airline-themes'    " Vim Airline
+Plugin 'dbeniamine/todo.txt-vim'           " Todo.txt plugin
 
 call vundle#end()
 filetype plugin indent on
@@ -150,15 +151,12 @@ autocmd BufWritePre *.html :%s/\s\+$//e    " Auto-remove trailing spaces for htm
 autocmd BufWritePre *.h :%s/\s\+$//e      " Auto-remove trailing spaces for headers on save
 autocmd BufWritePre *.vimrc :%s/\s\+$//e  " Auto-remove trailing spaces for vimrc on save
 
-" Add syntax highlighting for todo.txt
-autocmd BufRead,BufNewFile todo.txt set filetype=todo
-
 " Don't autocomment when adding a new line after a comment
 augroup DisableAutoComments
    autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
 augroup END
 
-set nobackup noswapfile         " Don't use swap/backup because we use GitHub
+set nobackup noswapfile         " Don't use swap/backup
 " autocmd! bufwritepost .vimrc source %       " Autoreload vimrc on save
 
 
@@ -305,10 +303,6 @@ nnoremap <leader>sv :source $MYVIMRC<CR>
 
 " For when you forget to sudo, you can still write with w!!
 cmap w!! %!sudo tee > /dev/null %
-
-" Disable Q, because let's face it that was an accident
-noremap Q <Nop>
-noremap q <Nop>
 
 " search for merge comments
 nmap <leader>gm /=======\\|>>>>>>>\\|<<<<<<<<CR>
