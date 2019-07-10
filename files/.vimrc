@@ -336,3 +336,10 @@ nnoremap <leader>td :vsplit $HOME/Repos/todo/todo.txt<CR>
 "    set undofile
 "    set undodir=/tmp
 " endif
+
+" Format C++ code with clang-format on save
+function! ClangFormat()
+   let l:formatdiff = 1
+   py3file /usr/share/clang/clang-format-6.0/clang-format.py
+endfunction
+autocmd BufWritePre *.h,*.hpp,*.cc,*.cpp call ClangFormat()
