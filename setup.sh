@@ -76,10 +76,13 @@ do_symlinking(){
 
 basic_setup() {
     echo -e "\033[1;30m- running basic setup..."
-#     sudo apt-get update &>/dev/null
-#     install_pkg git
-#     zsh_use
-     do_symlinking
+    sudo apt-get update &>/dev/null
+    zsh_use
+    conky_use
+    do_symlinking
+    install_pkg vim
+    install_pkg git
+    install_pkg caffeine
     echo -e "\033[1;30m- Done!!..."
 }
 
