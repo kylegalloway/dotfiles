@@ -1,9 +1,9 @@
 [push]
 	default = simple
 [user]
-	email = kyle.galloway@cfdrc.com
+	email = kyle.galloway.1993@gmail.com
 	name = Kyle Galloway
 [core]
-        editor = vim
+   editor = vim
 [alias]
     pull = pull --rebase --stat
