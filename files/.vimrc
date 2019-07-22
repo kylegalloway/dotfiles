@@ -120,11 +120,11 @@ match ErrorMsg '\%>121v.\+'     " Makes things past 101 characters look like err
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set showmode                    " always show what mode we're currently editing in
 set nowrap                      " don't wrap lines
-set tabstop=3                   " number of visual spaces per TAB
+set tabstop=4                   " number of visual spaces per TAB
 set smarttab
-set softtabstop=3               " number of spaces in tab when editing
+set softtabstop=4               " number of spaces in tab when editing
 set expandtab                   " tabs are spaces
-set shiftwidth=3                " number of spaces to use for autoindenting
+set shiftwidth=4                " number of spaces to use for autoindenting
 set shiftround                  " use multiple of shiftwidth when indenting with '<' and '>'
 set backspace=indent,eol,start  " allow backspacing over everything in insert mode
 set autoindent                  " always set autoindenting on
@@ -207,6 +207,12 @@ let g:signify_vcs_list = [ 'git', 'tfs' ]
 " Gitgutter
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:gitgutter_sign_column_always = 1
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Todotxt
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:TodoTxtStripDoneItemPriority=1
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
