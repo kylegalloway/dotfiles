@@ -1,9 +1,30 @@
+#! /usr/bin/zsh
 # Install Script
 # by Kyle Galloway
 # setup.sh
 # 
 
 DOTFILES="$HOME"/Repos/dotfiles/files
+
+vundle_install() {
+   git_clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+}
+
+git_clone() {
+    install_pkg git
+    echo -e "\033[1;33m Cloning ${1}... \033[0m"
+        if [ -n "${2}" ]; then
+            git clone ${1} ${2}
+	else
+	    git clone ${1}
+        fi
+    echo -e "\033[1;33m ${1} installed... \033[0m"
+}
+
+get_dotfiles() {
+   mkdir -p $HOME/Repos
+    git_clone https://github.com/kylegalloway/dotfiles $HOME/Repos/dotfiles
+}
 
 install_pkg() {
     echo -e "\033[1;33m Installing ${1}... \033[0m"
@@ -22,24 +43,13 @@ change_shell() {
     chsh -s "$(which "${1}")"
 }
 
-zsh_setup(){
-    echo "Installing prezto"
-    install_pkg git
-    git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
-    setopt EXTENDED_GLOB
-    for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
-      ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
-    done
-}
-
 zsh_use() {
     install_pkg zsh
     change_shell zsh
-    zsh_setup
 }
 
 conky_setup() {
-    echo "Installing conky"
+   echo "Installing conky"
    conky_dir=${HOME}/.config/conky
    mkdir -p ${conky_dir}
    symlink "$DOTFILES"/conky/conky.conf ${conky_dir}
@@ -77,13 +87,16 @@ do_symlinking(){
 basic_setup() {
     echo -e "\033[1;30m- running basic setup..."
     sudo apt-get update &>/dev/null
+    install_pkg git
+    install_pkg vim
+    install_pkg caffeine
+    get_dotfiles
+    vundle_install
     zsh_use
     conky_use
     do_symlinking
-    install_pkg vim
-    install_pkg git
-    install_pkg caffeine
     echo -e "\033[1;30m- Done!!..."
 }
 
 basic_setup
+
