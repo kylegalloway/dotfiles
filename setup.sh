@@ -8,6 +8,7 @@ DOTFILES="$HOME"/Repos/dotfiles/files
 
 vundle_install() {
    git_clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+   vim +PluginInstall +qall
 }
 
 git_clone() {
@@ -90,10 +91,10 @@ basic_setup() {
     install_pkg git
     install_pkg vim
     install_pkg caffeine
-    get_dotfiles
+    #get_dotfiles
     vundle_install
     zsh_use
-    conky_use
+    # conky_use
     do_symlinking
     echo -e "\033[1;30m- Done!!..."
 }
