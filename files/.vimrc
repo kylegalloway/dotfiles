@@ -100,6 +100,8 @@ if has("gui_running")
       set guifont=Menlo\ Regular:h14
    elseif has("gui_win32")             " Setup Windows Font
       set guifont=Inconsolata_for_Powerline:h12:cANSI
+   else
+      set guifont=Inconsolata\ for\ Powerline\ Medium\ 13
    endif
 endif
 set guioptions-=T               " Removes top toolbar

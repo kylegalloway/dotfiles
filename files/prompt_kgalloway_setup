@@ -9,9 +9,6 @@
 #   Jeff Sandberg <paradox460@gmail.com>
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
-# Screenshots:
-#   http://i.imgur.com/0XIWX.png
-#
 
 # Forked from paradox
 # Modified by: Kyle Galloway
@@ -20,83 +17,69 @@
 pmodload 'helper'
 
 # Define variables.
-_prompt_paradox_current_bg='NONE'
-_prompt_paradox_segment_separator=''
-_prompt_paradox_start_time=$SECONDS
+_prompt_kgalloway_current_bg='NONE'
+_prompt_kgalloway_segment_separator=''
 
-function prompt_paradox_start_segment {
+function prompt_kgalloway_start_segment {
   local bg fg
   [[ -n "$1" ]] && bg="%K{$1}" || bg="%k"
   [[ -n "$2" ]] && fg="%F{$2}" || fg="%f"
-  if [[ "$_prompt_paradox_current_bg" != 'NONE' && "$1" != "$_prompt_paradox_current_bg" ]]; then
-    print -n " $bg%F{$_prompt_paradox_current_bg}$_prompt_paradox_segment_separator$fg "
+  if [[ "$_prompt_kgalloway_current_bg" != 'NONE' && "$1" != "$_prompt_kgalloway_current_bg" ]]; then
+    print -n " $bg%F{$_prompt_kgalloway_current_bg}$_prompt_kgalloway_segment_separator$fg "
   else
     print -n "$bg$fg "
   fi
-  _prompt_paradox_current_bg="$1"
+  _prompt_kgalloway_current_bg="$1"
   [[ -n "$3" ]] && print -n "$3"
 }
 
-function prompt_paradox_end_segment {
-  if [[ -n "$_prompt_paradox_current_bg" ]]; then
-    print -n " %k%F{$_prompt_paradox_current_bg}$_prompt_paradox_segment_separator"
+function prompt_kgalloway_end_segment {
+  if [[ -n "$_prompt_kgalloway_current_bg" ]]; then
+    print -n " %k%F{$_prompt_kgalloway_current_bg}$_prompt_kgalloway_segment_separator"
   else
     print -n "%k"
   fi
   print -n "%f"
-  _prompt_paradox_current_bg=''
+  _prompt_kgalloway_current_bg=''
 }
 
-function prompt_paradox_build_prompt {
-  # Removed to take out the username@host
-  # prompt_paradox_start_segment black default '%(?::%F{red}✘ )%(!:%F{yellow}⚡ :)%(1j:%F{cyan}⚙ :)%F{blue}%n%F{red}@%F{green}%m%f'
+function prompt_kgalloway_build_prompt {
+  # This gives information on return values (%?:), history? (%!), and background jobs (%1j)
+  # prompt_kgalloway_start_segment black default '%(?::%F{red}✘ )%(!:%F{yellow}⚡ :)%(1j:%F{cyan}⚙ :)%f'
 
-  prompt_paradox_start_segment blue black '$_prompt_paradox_pwd'
+  # History line number
+  prompt_kgalloway_start_segment blue black '%!'
+
+  # User@Machine
+  # prompt_kgalloway_start_segment cyan black '%n@%m'
+
+  # No user@machine
+  prompt_kgalloway_start_segment magenta black '$_prompt_kgalloway_pwd'
 
   if [[ -n "$git_info" ]]; then
-    prompt_paradox_start_segment green black '${(e)git_info[ref]}${(e)git_info[status]}'
+    prompt_kgalloway_start_segment green black '${(e)git_info[ref]}${(e)git_info[status]}'
   fi
 
-  prompt_paradox_end_segment
+  prompt_kgalloway_end_segment
 }
 
-function prompt_paradox_pwd {
+function prompt_kgalloway_pwd {
   local pwd="${PWD/#$HOME/~}"
 
   if [[ "$pwd" == (#m)[/~] ]]; then
-    _prompt_paradox_pwd="$MATCH"
+    _prompt_kgalloway_pwd="$MATCH"
     unset MATCH
   else
-    #_prompt_paradox_pwd="${${${${(@j:/:M)${(@s:/:)pwd}##.#?}:h}%/}//\%/%%}/${${pwd:t}//\%/%%}"
-    _prompt_paradox_pwd="${${${${(@j:/:M)${(@s:/:)pwd}##.#?}:h}%/}//\%/%%}/${${pwd:t}//\%/%%}"
+    _prompt_kgalloway_pwd="${${${${(@j:/:M)${(@s:/:)pwd}##.#?}:h}%/}//\%/%%}/${${pwd:t}//\%/%%}"
   fi
 }
 
-function prompt_paradox_print_elapsed_time {
-  local end_time=$(( SECONDS - _prompt_paradox_start_time ))
-  local hours minutes seconds remainder
-
-  if (( end_time >= 3600 )); then
-    hours=$(( end_time / 3600 ))
-    remainder=$(( end_time % 3600 ))
-    minutes=$(( remainder / 60 ))
-    seconds=$(( remainder % 60 ))
-    print -P "%B%F{red}>>> elapsed time ${hours}h${minutes}m${seconds}s%b"
-  elif (( end_time >= 60 )); then
-    minutes=$(( end_time / 60 ))
-    seconds=$(( end_time % 60 ))
-    print -P "%B%F{yellow}>>> elapsed time ${minutes}m${seconds}s%b"
-  elif (( end_time > 10 )); then
-    print -P "%B%F{green}>>> elapsed time ${end_time}s%b"
-  fi
-}
-
-function prompt_paradox_precmd {
+function prompt_kgalloway_precmd {
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
 
   # Format PWD.
-  prompt_paradox_pwd
+  prompt_kgalloway_pwd
 
   # Get Git repository information.
   if (( $+functions[git-info] )); then
@@ -106,14 +89,13 @@ function prompt_paradox_precmd {
   # Calculate and print the elapsed time.
 
 # I removed this so the elapsed time would not show.
-#  prompt_paradox_print_elapsed_time
+#  prompt_kgalloway_print_elapsed_time
 }
 
-function prompt_paradox_preexec {
-  _prompt_paradox_start_time="$SECONDS"
+function prompt_kgalloway_preexec {
 }
 
-function prompt_paradox_setup {
+function prompt_kgalloway_setup {
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
   prompt_opts=(cr percent subst)
@@ -122,8 +104,8 @@ function prompt_paradox_setup {
   autoload -Uz add-zsh-hook
 
   # Add hook for calling git-info before each command.
-  add-zsh-hook preexec prompt_paradox_preexec
-  add-zsh-hook precmd prompt_paradox_precmd
+  add-zsh-hook preexec prompt_kgalloway_preexec
+  add-zsh-hook precmd prompt_kgalloway_precmd
 
   # Set editor-info parameters.
   zstyle ':prezto:module:editor:info:completing' format '%B%F{red}...%f%b'
@@ -152,9 +134,23 @@ function prompt_paradox_setup {
     'status' '%s%D%A%B%S%a%d%m%r%U%u'
 
   # Define prompts.
-  PROMPT='${(e)$(prompt_paradox_build_prompt)} ${editor_info[keymap]} '
-  RPROMPT='%F{blue}[%F{green}%D{%H:%M:%S}%F{blue}]%f'
+
+  # Left prompt
+  PROMPT='${(e)$(prompt_kgalloway_build_prompt)} ${editor_info[keymap]} '
+  # Right prompt
+  RPROMPT='%F{blue}[%F{green}%t %F{blue}]%f'
+  # Continuation prompt.
+  export PROMPT2='(%_) ${editor_info[keymap]}'
+  # Selection prompt.
+  export PROMPT3='
+(?) ${editor_info[keymap]}'
+  # Execution trace prompt.
+  export PROMPT4='${yellow}+${blue}%N ${green}@${magenta}%i ${reset_color}'
+  # Autocorrection prompt
   SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
+
+  # Backup root prompt for Bash.
+  export SUDO_PS1="\[\e[31;1;46m\][\u] \w \$\[\e[0m\] "
 }
 
-prompt_paradox_setup "$@"
+prompt_kgalloway_setup "$@"
