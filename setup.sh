@@ -61,6 +61,11 @@ conky_use() {
    conky_setup
 }
 
+install_fonts() {
+    install_pkg fonts-powerline
+    python ./installFonts.py
+}
+
 symlink() {
   cd "$HOME" || exit
   ORG=$1
@@ -82,6 +87,7 @@ do_symlinking(){
            symlink $(readlink -e "$f") "${HOME}/${BASENAME}"
         fi
     done
+    ln -sf $DOTFILES/prompt_kgalloway_setup $HOME/.zprezto/modules/prompt/functions/prompt_kgalloway_setup
 }
 
 basic_setup() {
@@ -90,6 +96,7 @@ basic_setup() {
     install_pkg git
     install_pkg vim
     install_pkg caffeine
+    install_fonts
     get_dotfiles
     vundle_install
     zsh_use
