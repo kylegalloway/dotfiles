@@ -8,6 +8,7 @@ DOTFILES="$HOME"/Repos/dotfiles/files
 
 vundle_install() {
    git_clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+   vim +PluginInstall +qall
 }
 
 git_clone() {
