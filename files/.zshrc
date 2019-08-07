@@ -12,6 +12,8 @@ fi
 
 # Customize to your needs...
 export LSCOLORS="exfxcxdxbxegedabagacad"
+export EDITOR="vim"
+export VISUAL=$EDITOR
 
 # Add General aliases.
 if [ -f ~/Repos/dotfiles/generalAliases ]; then
