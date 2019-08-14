@@ -31,6 +31,7 @@ Plugin 'Valloric/vim-indent-guides'        " See the spaces (and tabs)
 Plugin 'vim-airline/vim-airline'           " Vim Airline
 Plugin 'vim-airline/vim-airline-themes'    " Vim Airline
 Plugin 'dbeniamine/todo.txt-vim'           " Todo.txt plugin
+Plugin 'rust-lang/rust.vim'                " Rust file detection, syntax highlighting, formatting, etc.
 
 call vundle#end()
 filetype plugin indent on
@@ -191,6 +192,12 @@ nmap vs :vsplit<CR>
 nmap hs :split<CR>
 set splitright " Open splits on the right
 set splitbelow " Open splits at the bottom
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Rust
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:rustfmt_autosave = 1
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
