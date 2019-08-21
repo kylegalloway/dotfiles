@@ -35,3 +35,10 @@ bindkey "^I" expand-or-complete-with-dots
 # This is amazing, it shows progress for processes longer than the given number of seconds
 REPORTTIME=10
 
+# FZF
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Autojump
+[[ -s /home/ckg/.autojump/etc/profile.d/autojump.sh ]] && source /home/ckg/.autojump/etc/profile.d/autojump.sh
+autoload -U compinit && compinit -u
+

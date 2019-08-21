@@ -6,6 +6,39 @@
 
 DOTFILES="$HOME"/Repos/dotfiles/files
 
+. /etc/lsb-release
+
+get_faster_tools() {
+    # fzf
+    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    . ~/.fzf/install
+
+    # autojump
+    git clone git://github.com/wting/autojump.git ~/.autojump
+    cd ~/.autojump
+    python ./install.py
+
+    # ripgrep
+    if [ $DISTRIB_RELEASE -ge 18.10 ]; then
+        install_pkg ripgrep
+    else
+        curl -LO https://github.com/BurntSushi/ripgrep/releases/download/11.0.2/ripgrep_11.0.2_amd64.deb
+        sudo dpkg -i ./ripgrep_11.0.2_amd64.deb
+    fi
+
+    # bat
+    curl -LO https://github.com/sharkdp/bat/releases/download/v0.11.0/bat_0.11.0_amd64.deb
+    sudo dpkg -i ./bat_0.11.0_amd64.deb
+
+    # fd
+    if [ $DISTRIB_RELEASE -ge 19.04 ]; then
+        sudo apt install fd-find
+    else
+        curl -LO https://github.com/sharkdp/fd/releases/download/v7.3.0/fd_7.3.0_amd64.deb
+        sudo dpkg -i ./fd_7.3.0_amd64.deb
+    fi
+}
+
 vundle_install() {
    git_clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
    vim +PluginInstall +qall
@@ -103,6 +136,7 @@ basic_setup() {
     zsh_use
     conky_use
     do_symlinking
+    get_faster_tools
     echo -e "\033[1;30m- Done!!..."
 }
 
