@@ -39,6 +39,6 @@ REPORTTIME=10
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Autojump
-[[ -s /home/ckg/.autojump/etc/profile.d/autojump.sh ]] && source /home/ckg/.autojump/etc/profile.d/autojump.sh
+[[ -s $HOME/.autojump/etc/profile.d/autojump.sh ]] && source $HOME/.autojump/etc/profile.d/autojump.sh
 autoload -U compinit && compinit -u
 
