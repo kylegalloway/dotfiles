@@ -1,16 +1,18 @@
 ;; -*- mode: elisp -*-
-; Emacs init file
-; by Kyle Galloway
-; Remove menu bar
+;; Emacs init file
+;; by Kyle Galloway
+;; Remove menu bar
 (menu-bar-mode -1)
-; Remove tool bar
+;; Remove tool bar
 (tool-bar-mode -1)
-; Remove scroll bar
+;; Remove scroll bar
 (scroll-bar-mode -1)
-; Add line numbers globally
+;; Add line numbers globally
 (global-linum-mode 1)
-; Remove line numbers in the terminal
+;; Remove line numbers in the terminal
 (add-hook 'term-mode-hook (lambda () (linum-mode -1)))
+;; We don't want to type yes and no all the time so, do y and n
+(defalias 'yes-or-no-p 'y-or-n-p)
 
 (setq delete-old-versions -1 )		; delete excess backup versions silently
 (setq version-control t )		; use version control
@@ -25,7 +27,7 @@
 (setq sentence-end-double-space nil)	; sentence SHOULD end with only a point.
 (setq default-fill-column 80)		; toggle wrapping text at the 80th character
 
-; set ido mode on and allow it to match on C-c C-f
+;; set ido mode on and allow it to match on C-c C-f
 (ido-mode 1)
 (setq ido-enable-flex-matching t)
 (setq ido-everywhere t)
@@ -47,16 +49,16 @@
 (setq-default org-display-custom-times t)
 (setq org-time-stamp-custom-formats '("<%F>" . "<%b %e %Y %H:%M>"))
 
-; Global auto-indent
+;; Global auto-indent
 (define-key global-map (kbd "RET") 'newline-and-indent)
 
-; Shortcut to get to init.el
+;; Shortcut to get to init.el
 (global-set-key (kbd "<f5>") (lambda() (interactive)(find-file "~/.emacs.d/init.el")))
 
-; Shortcut to get to todo.org
+;; Shortcut to get to todo.org
 (global-set-key (kbd "<f6>") (lambda() (interactive)(find-file "~/Repos/todo/todo.org")))
 
-; Cua mode (normal copy/paste/cut/undo keys
+;; Cua mode (normal copy/paste/cut/undo keys
 ;; C-x for cut
 ;; C-c for copy
 ;; C-v for paste
@@ -75,7 +77,7 @@
             (lambda () (linum-mode 0))
             :append :local))
 
-;;;;;;; Install use-package
+;;;;;; Install use-package
 ;; Update package-archive lists
 (require 'package)
 (setq package-enable-at-startup nil)
@@ -91,12 +93,12 @@
 (eval-when-compile
   (require 'use-package))
 
-; SpaceMacs theme
+;; SpaceMacs theme
 (use-package spacemacs-common
     :ensure spacemacs-theme
     :config (load-theme 'spacemacs-dark t))
 
-; Install Evil mode
+;; Install Evil mode
 ;; load evil
 (use-package evil
   :ensure t ;; install the evil package if not installed
@@ -111,7 +113,7 @@
   :config ;; tweak evil after loading it
   (evil-mode)
 
-  ; Change initial states for certain modes
+  ;; Change initial states for certain modes
   (evil-set-initial-state 'inferior-emacs-lisp-mode 'emacs)
   (evil-set-initial-state 'shell-mode 'emacs)
   (evil-set-initial-state 'term-mode 'emacs)
@@ -119,13 +121,13 @@
   (evil-set-initial-state 'dired-mode 'emacs)
   (evil-set-initial-state 'org-mode 'emacs)
   ;; example how to map a command in normal mode (called 'normal state' in evil)
-  ;(define-key evil-normal-state-map (kbd ", w") 'evil-window-vsplit))
+  ;; (define-key evil-normal-state-map (kbd ", w") 'evil-window-vsplit))
   ;; example how to map a command in insert mode (called 'insert state' in evil)
   ;; (define-key evil-insert-state-map (kbd "jj") 'evil-normal-state)
 )
   
 
-; Install Evil Commentary (like Vim Commentary)
+;; Install Evil Commentary (like Vim Commentary)
 (use-package evil-commentary
   :ensure t
   :config
@@ -135,6 +137,7 @@
   ;; (define-key evil-commentary-mode-map (kbd "M-;") 'evil-commentary-line)
 )
 
+;; Install projectile for project management
 (use-package projectile
   :ensure t
   :config
@@ -143,6 +146,7 @@
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 )
 
+;; Install a better terminal emulator
 (use-package multi-term
   :ensure t
   :init
@@ -161,14 +165,25 @@
   (multi-term-dedicated-select)
 )
 
-; Fix terminal colors inside emacs
+;; Fix terminal colors inside emacs
 (use-package eterm-256color
   :ensure t
   :config
   (add-hook 'term-mode-hook #'eterm-256color-mode)
 )
 
-; Try to make evil mode treat _ as part of words
+;; Add syntax support for CMake
+(use-package cmake-mode :ensure t)
+
+;; Add syntax support for Dockerfiles
+(use-package dockerfile-mode :ensure t)
+(add-to-list 'auto-mode-alist '("Dockerfile" . dockerfile-mode))
+
+;; Add syntax support for Dockerfiles
+(use-package yaml-mode :ensure t)
+(add-to-list 'auto-mode-alist '("\\.ya?ml$" . yaml-mode))
+
+;; Try to make evil mode treat _ as part of words
 (add-hook 'after-change-major-mode-hook (lambda () (modify-syntax-entry ?_ "w")))
 
 (custom-set-variables
@@ -179,7 +194,7 @@
  '(org-agenda-files (quote ("~/Repos/todo/todo.org")))
  '(package-selected-packages
    (quote
-    (eterm-256color multi-term projectile evil-commentary evil spacemacs-theme use-package))))
+    (yaml-mode dockerfile-mode cmake-mode eterm-256color multi-term projectile evil-commentary evil spacemacs-theme use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
