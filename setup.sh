@@ -8,6 +8,13 @@
 DOTFILES="$HOME"/Repos/dotfiles/files
 
 
+install_emacs() {
+    install_pkg emacs26 ppa:kelleyk/emacs
+    emacs_dir=${HOME}/.emacs.d
+    mkdir -p ${emacs_dir}
+    symlink "$DOTFILES"/init.el ${emacs_dir}/init.el
+}
+
 install_nms() {
     echo -e "\033[1;33m Installing No More Secrets \033[0m"
     if ! nms_loc="$(type -p "nms")" || [[ -z $nms_loc ]]; then
@@ -209,6 +216,7 @@ basic_setup() {
     # do_symlinking
     get_faster_tools
     get_fun_tools
+    install_emacs
     echo -e "\033[1;30m- Done!!..."
 }
 
