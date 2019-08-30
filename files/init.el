@@ -133,6 +133,43 @@
 (use-package spacemacs-common
     :ensure spacemacs-theme
     :config (load-theme 'spacemacs-dark t))
+;; Base 16 themes
+;; (use-ackage base16-theme
+;;   :ensure t
+;;   :config
+;;   (load-theme 'base16-default-dark t))
+;;   (load-theme 'base16-woodland t))
+;;   (load-theme 'base16-atelier-dune t))
+;;   (load-theme 'base16-atelier-forest t))
+;;   (load-theme 'base16-darktooth t))
+;;   (load-theme 'base16-default-dark t))
+;;   (load-theme 'base16-eighties t))
+;;   (load-theme 'base16-google-dark t))
+;;   (load-theme 'base16-hopscotch t))
+;;   (load-theme 'base16-ir-black t))
+;;   (load-theme 'base16-isotope t))
+;;   (load-theme 'base16-london-tube t))
+;;   (load-theme 'base16-macintosh t))
+;;   (load-theme 'base16-materia t))
+;;   (load-theme 'base16-monokai t))
+;;   (load-theme 'base16-pop t))
+;;   (load-theme 'base16-railscasts t))
+;;   (load-theme 'base16-seti-ui t))
+;;   (load-theme 'base16-solar-flare t))
+;;   (load-theme 'base16-solarized-dark t))
+;;   (load-theme 'base16-spacemacs t))
+;;   (load-theme 'base16-summerfruit-dark t))
+;;   (load-theme 'base16-tomorrow-night t))
+;;   (load-theme 'base16-twilight t))
+;;   (load-theme 'base16-unikitty-dark t))
+;; Set the cursor color based on the evil state
+;; (defvar my/base16-colors base16-default-dark-colors)
+;; (setq evil-emacs-state-cursor   `(,(plist-get my/base16-colors :base0D) box)
+;;       evil-insert-state-cursor  `(,(plist-get my/base16-colors :base0D) bar)
+;;       evil-motion-state-cursor  `(,(plist-get my/base16-colors :base0E) box)
+;;       evil-normal-state-cursor  `(,(plist-get my/base16-colors :base0B) box)
+;;       evil-replace-state-cursor `(,(plist-get my/base16-colors :base08) bar)
+;;       evil-visual-state-cursor  `(,(plist-get my/base16-colors :base09) box))
 
 ;; Install Evil mode
 ;; load evil
@@ -230,7 +267,7 @@
  '(org-agenda-files (quote ("~/Repos/todo/todo.org")))
  '(package-selected-packages
    (quote
-    (yaml-mode dockerfile-mode cmake-mode eterm-256color multi-term projectile evil-commentary evil spacemacs-theme use-package))))
+    (base16-theme yaml-mode dockerfile-mode cmake-mode eterm-256color multi-term projectile evil-commentary evil spacemacs-theme use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
