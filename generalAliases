@@ -20,6 +20,9 @@ alias gst='git status'
 alias gbpurge="git checkout master; git pull origin master; git fetch --all -p; git branch -vv | awk '$3 $4 ~ /:gone]$/ { print $1 }' | xargs -n 1 git branch -d"
 alias fixssh='eval "$(ssh-agent -s)";ssh-add'
 
+# Emacs
+alias em="emacs -nw"
+
 # The following are handled in .zprezto/modules/git/alias.zsh
 # alias gia='git add'
 # alias gcm='git commit -m'

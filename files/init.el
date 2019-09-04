@@ -16,6 +16,8 @@
 ;; I don't want any backups
 (setq make-backup-files nil) ; stop creating backup~ files
 (setq auto-save-default nil) ; stop creating #autosave# files
+;; Fix scrolling to stop centering when scrolling past visible portion
+(setq scroll-conservatively 1)
 
 (setq delete-old-versions -1 )		; delete excess backup versions silently
 (setq version-control t )		; use version control
@@ -256,6 +258,20 @@
 (use-package yaml-mode :ensure t)
 (add-to-list 'auto-mode-alist '("\\.ya?ml$" . yaml-mode))
 
+;; Add markdown support
+(use-package markdown-mode
+  :ensure t
+  :commands (markdown-mode gfm-mode)
+  :mode (
+	 ("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode)
+	)
+  :init (setq markdown-command "multimarkdown")
+)
+
+
+
 ;; Try to make evil mode treat _ as part of words
 (add-hook 'after-change-major-mode-hook (lambda () (modify-syntax-entry ?_ "w")))
 
@@ -267,7 +283,7 @@
  '(org-agenda-files (quote ("~/Repos/todo/todo.org")))
  '(package-selected-packages
    (quote
-    (base16-theme yaml-mode dockerfile-mode cmake-mode eterm-256color multi-term projectile evil-commentary evil spacemacs-theme use-package))))
+    (markdown-mode git-gutter base16-theme yaml-mode dockerfile-mode cmake-mode eterm-256color multi-term projectile evil-commentary evil spacemacs-theme use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

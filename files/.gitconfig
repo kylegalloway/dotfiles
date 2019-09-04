@@ -7,3 +7,5 @@
    editor = vim
 [alias]
     pull = pull --rebase --stat
+[diff]
+	compactionHeuristic = true
