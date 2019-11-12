@@ -29,9 +29,10 @@ Plugin 'mhinz/vim-signify'                 " Adds source control gutter
 Plugin 'tpope/vim-commentary'              " Vim Commentary
 Plugin 'Valloric/vim-indent-guides'        " See the spaces (and tabs)
 Plugin 'vim-airline/vim-airline'           " Vim Airline
-Plugin 'vim-airline/vim-airline-themes'    " Vim Airline
+Plugin 'vim-airline/vim-airline-themes'    " Vim Airline Themes
 Plugin 'dbeniamine/todo.txt-vim'           " Todo.txt plugin
 Plugin 'rust-lang/rust.vim'                " Rust file detection, syntax highlighting, formatting, etc.
+Plugin 'editorconfig/editorconfig-vim'     " EditorConfig integration
 
 call vundle#end()
 filetype plugin indent on
