@@ -33,6 +33,7 @@ Plugin 'vim-airline/vim-airline-themes'    " Vim Airline Themes
 Plugin 'dbeniamine/todo.txt-vim'           " Todo.txt plugin
 Plugin 'rust-lang/rust.vim'                " Rust file detection, syntax highlighting, formatting, etc.
 Plugin 'editorconfig/editorconfig-vim'     " EditorConfig integration
+Plugin 'leafgarland/typescript-vim'        " Typescript support
 
 call vundle#end()
 filetype plugin indent on
@@ -119,8 +120,8 @@ set mouse=                      " disable the mouse
 set number                      " always show line numbers
 set showmatch                   " highlight matching [{()}]
 
-set colorcolumn=121             " Sets a color column at 101 characters
-match ErrorMsg '\%>121v.\+'     " Makes things past 101 characters look like errors
+set colorcolumn=121             " Sets a color column at 121 characters
+match ErrorMsg '\%>121v.\+'     " Makes things past 121 characters look like errors
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -278,7 +279,7 @@ set laststatus=2 "Show airline even when no splits are open
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Makes long lines appear in error highlighting.
 function! ColorizeBadStyles()
-   set colorcolumn=101
+   set colorcolumn=121
    match ErrorMsg '\%>121v.\+'
 endfunction
 
