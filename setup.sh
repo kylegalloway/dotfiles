@@ -216,7 +216,7 @@ basic_setup() {
     # do_symlinking
     # get_faster_tools
     # get_fun_tools
-    install_emacs
+    # install_emacs
     echo -e "\033[1;30m- Done!!..."
 }
 
