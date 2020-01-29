@@ -33,4 +33,5 @@ alias em="emacs -nw"
 
 # General
 alias updateall="sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get autoremove -y && sudo apt autoclean -y"
-
+alias news="curl -s 'https://www.npr.org/rss/rss.php?id=1001' | grep '<title>' | sed 's/ <title>//g;s/<\/title>//;' | tail -n+3 | awk '{\$1=\$1};1'"
+alias smallnews="news | head -n 5 | nl -bt -nrn -s'. ' | awk '{\$1=\$1};1' | fold -sw 50"

@@ -30,6 +30,9 @@ install_nms() {
 get_fun_tools() {
     # No More Secrets (Sneakers movie effect)
     install_nms
+    install_pkg cmatrix
+    install_pkg aafire
+    install_pkg asciiquarium ppa:ytvwld/asciiquarium
 }
 
 install_fzf() {
