@@ -30,8 +30,9 @@ install_nms() {
 get_fun_tools() {
     # No More Secrets (Sneakers movie effect)
     install_nms
+    install_pkg oneko
     install_pkg cmatrix
-    install_pkg aafire
+    install_pkg libaa-bin
     install_pkg asciiquarium ppa:ytvwld/asciiquarium
 }
 
@@ -218,7 +219,7 @@ basic_setup() {
     # conky_use
     # do_symlinking
     # get_faster_tools
-    # get_fun_tools
+    get_fun_tools
     # install_emacs
     echo -e "\033[1;30m- Done!!..."
 }
