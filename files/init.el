@@ -272,7 +272,8 @@
   :init (setq markdown-command "multimarkdown")
 )
 
-
+;; Add json support
+(use-package json-mode :ensure t)
 
 ;; Try to make evil mode treat _ as part of words
 (add-hook 'after-change-major-mode-hook (lambda () (modify-syntax-entry ?_ "w")))

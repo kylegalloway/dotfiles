@@ -30,9 +30,9 @@ install_nms() {
 get_fun_tools() {
     # No More Secrets (Sneakers movie effect)
     install_nms
+    install_pkg oneko
     install_pkg cmatrix
     install_pkg libaa-bin
-    install_pkg oneko
     install_pkg asciiquarium ppa:ytvwld/asciiquarium
 }
 
