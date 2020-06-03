@@ -42,3 +42,8 @@ REPORTTIME=10
 [[ -s $HOME/.autojump/etc/profile.d/autojump.sh ]] && source $HOME/.autojump/etc/profile.d/autojump.sh
 autoload -U compinit && compinit -u
 
+# Flutter
+export PATH="$PATH:$HOME/src/flutter/bin"
+
+# Android Studio
+export PATH="$PATH:$HOME/src/android-studio/bin"

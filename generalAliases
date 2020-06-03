@@ -12,7 +12,7 @@ alias gohome="cd ~;clear;"
 
 # Git
 alias pullall="find . -mindepth 1 -maxdepth 1 -type d -print -exec git -C {} pull \;"
-alias checkall="find . -mindepth 1 -maxdepth 1 -type d -print -exec git -C {} status \;"
+alias checkall="find . -mindepth 1 -maxdepth 1 -type d -print -exec git -C {} status --porcelain \;"
 alias gitupdate='git add --all; git commit -am "update"; git push'
 alias fixgitignore='git rm --cached `git ls-files -i --exclude-from=.gitignore`'
 alias gaa='git add --all'
@@ -35,6 +35,7 @@ alias em="emacs -nw"
 alias updateall="sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get autoremove -y && sudo apt autoclean -y"
 alias news="curl -s 'https://www.npr.org/rss/rss.php?id=1001' | grep '<title>' | sed 's/ <title>//g;s/<\/title>//;' | tail -n+3 | awk '{\$1=\$1};1'"
 alias smallnews="news | head -n 5 | nl -bt -nrn -s'. ' | awk '{\$1=\$1};1' | fold -sw 50"
+alias restart_conky="killall conky; ~/.config/conky/start_conky.sh"
 
 # Functions
 # Opens raid page for character in Raid. Converts input from upper to lower and replaces spaces w/ hyphens
