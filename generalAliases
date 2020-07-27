@@ -36,6 +36,7 @@ alias updateall="sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get 
 alias news="curl -s 'https://www.npr.org/rss/rss.php?id=1001' | grep '<title>' | sed 's/ <title>//g;s/<\/title>//;' | tail -n+3 | awk '{\$1=\$1};1'"
 alias smallnews="news | head -n 5 | nl -bt -nrn -s'. ' | awk '{\$1=\$1};1' | fold -sw 50"
 alias restart_conky="killall conky; ~/.config/conky/start_conky.sh"
+alias md2html="cat $1 | pandoc --from=markdown --to=html"
 
 # Functions
 # Opens raid page for character in Raid. Converts input from upper to lower and replaces spaces w/ hyphens
